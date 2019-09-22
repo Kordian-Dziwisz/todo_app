@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
+package.json
 /dist
+.git
 
 # local env files
 .env.local
