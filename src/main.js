@@ -4,7 +4,8 @@ Vue.config.productionTip = false
 import App from './app.vue'
 import router from './router'
 import store from './store'
-import boostrap from 'bootstrap'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
 
 //firebase init
 import firebase from 'firebase'
