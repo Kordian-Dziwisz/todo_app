@@ -23,6 +23,11 @@
 				required
 			/>
 		</div>
+		<small>
+			Nie masz konta?
+			<router-link to="/register">Zarejestruj się</router-link>
+		</small>
+		<br />
 		<button class="btn btn-primary" type="submit">Zaloguj się</button>
 	</form>
 </template>
