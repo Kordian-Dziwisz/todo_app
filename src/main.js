@@ -8,13 +8,16 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 
 //firebase init
-import firebase from 'firebase'
-require('firebase/firestore')
+import firebase from 'firebase/app'
 import firebaseConfig from './firebase'
 
 firebase.initializeApp(firebaseConfig)
-const firestore = firebase.firestore()
+// firebase
+// 	.auth()
+// 	.signOut()
+// 	.catch(err => {}) //auto logout(for auth testing)
 
+//vue object init
 new Vue({
 	router,
 	store,
