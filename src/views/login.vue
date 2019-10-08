@@ -47,7 +47,7 @@ export default {
 				.auth()
 				.signInWithEmailAndPassword(this.email, this.password)
 				.catch(err => {
-					console.log(err.code, err.message)
+					console.log(err)
 				})
 		}
 	}
