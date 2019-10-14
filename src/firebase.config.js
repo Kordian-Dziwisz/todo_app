@@ -12,23 +12,4 @@ const config = {
 
 firebase.initializeApp(config)
 
-class firebaseTask {
-	constructor(creator, title, content, meta) {
-		try {
-			if (typeof title != 'string' || typeof creator != 'string') {
-				throw new Error(
-					"firebaseTask.prototype.constructor: title or creator aren't strings"
-				)
-			}
-			this.title = title
-			this.creator = creator
-			this.content = content ? content : ''
-			this.meta = meta ? meta : {}
-			this.completed = false
-		} catch (e) {
-			console.log(e)
-		}
-	}
-}
-
 export default config

@@ -72,13 +72,6 @@ export default {
 			)
 		}
 	},
-	mounted() {
-		firebase.auth().onAuthStateChanged(user => {
-			if (user) {
-				this.addUserToFirestore(user.uid)
-			}
-		})
-	},
 	methods: {
 		register() {
 			if (this.isFormCompleted) {
@@ -91,19 +84,6 @@ export default {
 			} else {
 				console.log("form isn't completed")
 			}
-		},
-		addUserToFirestore(uid) {
-			firebase
-				.firestore()
-				.collection('users-dev')
-				.doc(uid)
-				.set({
-					name: this.name,
-					config: {}
-				})
-				.catch(err => {
-					console.log(err)
-				})
 		}
 	}
 }
