@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from './views/login'
-import Register from './views/register'
-import UserPanel from './views/user-panel'
+import Login from '@v/login'
+import Register from '@v/register'
+import UserPanel from '@v/user-panel/user-panel.vue'
 
 Vue.use(Router)
 
