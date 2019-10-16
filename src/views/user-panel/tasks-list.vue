@@ -1,0 +1,31 @@
+<template>
+	<div></div>
+</template>
+<script>
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
+export default {
+	data() {
+		return {
+			list: []
+		}
+	},
+	methods: {
+		getList() {
+			firebase
+				.firestore()
+				.collection('projects')
+				.doc('A1X83DUed6fOPqwt1iJi')
+				.collection('tasks')
+				.get()
+				.then(collection => {
+					this.list = collection.docs.map(this.mapList)
+				})
+		},
+		mapList(task) {
+			return task.data()
+		}
+	}
+}
+</script>
