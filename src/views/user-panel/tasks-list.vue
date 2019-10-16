@@ -8,8 +8,15 @@ import 'firebase/auth'
 export default {
 	data() {
 		return {
-			list: []
+			list: [],
+			task: {
+				title: '',
+				content: ''
+			}
 		}
+	},
+	created() {
+		this.getList()
 	},
 	methods: {
 		getList() {
@@ -25,6 +32,17 @@ export default {
 		},
 		mapList(task) {
 			return task.data()
+		},
+		addTask() {
+			firebase
+				.firestore()
+				.collection('projects')
+				.doc('A1X83DUed6fOPqwt1iJi')
+				.collection('tasks')
+				.add(this.task)
+				.catch(err => {
+					console.log(err)
+				})
 		}
 	}
 }
