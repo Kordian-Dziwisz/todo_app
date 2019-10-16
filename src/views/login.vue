@@ -46,9 +46,7 @@ export default {
 			firebase
 				.auth()
 				.signInWithEmailAndPassword(this.email, this.password)
-				.catch(err => {
-					console.log(err)
-				})
+				.catch(console.log)
 		}
 	}
 }

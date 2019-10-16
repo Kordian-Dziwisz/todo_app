@@ -78,9 +78,7 @@ export default {
 				firebase
 					.auth()
 					.createUserWithEmailAndPassword(this.email, this.password)
-					.catch(err => {
-						console.log(err)
-					})
+					.catch(console.log)
 			} else {
 				console.log("form isn't completed")
 			}

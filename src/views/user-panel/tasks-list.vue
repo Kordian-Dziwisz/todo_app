@@ -40,9 +40,7 @@ export default {
 				.doc('A1X83DUed6fOPqwt1iJi')
 				.collection('tasks')
 				.add(this.task)
-				.catch(err => {
-					console.log(err)
-				})
+				.catch(console.log)
 		}
 	}
 }
