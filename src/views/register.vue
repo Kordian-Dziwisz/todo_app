@@ -51,7 +51,6 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import 'firebase/firestore'
 export default {
 	data() {
 		return {
@@ -78,7 +77,7 @@ export default {
 				firebase
 					.auth()
 					.createUserWithEmailAndPassword(this.email, this.password)
-					.catch(console.log)
+					.catch(llconsole.log)
 			} else {
 				console.log("form isn't completed")
 			}
