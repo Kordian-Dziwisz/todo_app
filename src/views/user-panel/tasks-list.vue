@@ -40,6 +40,16 @@ export default {
 				.collection('tasks')
 				.add(this.task)
 				.catch(console.log)
+		},
+		deleteTask(taskID) {
+			firebase
+				.firestore()
+				.collection('projects')
+				.doc('A1X83DUed6fOPqwt1iJi')
+				.collection('tasks')
+				.doc(taskID)
+				.delete()
+				.then(console.log)
 		}
 	}
 }
