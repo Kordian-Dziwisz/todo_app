@@ -15,41 +15,47 @@ export default {
 		}
 	},
 	created() {
+		this.tasks = firebase
+			.firestore()
+			.collection('projects')
+			.doc('A1X83DUed6fOPqwt1iJi')
+			.collection('tasks')
+
 		this.getList()
 	},
 	methods: {
 		getList() {
-			firebase
-				.firestore()
-				.collection('projects')
-				.doc('A1X83DUed6fOPqwt1iJi')
-				.collection('tasks')
+			this.tasks
 				.get()
 				.then(collection => {
 					this.list = collection.docs.map(this.mapList)
 				})
+				.catch(console.log)
 		},
 		mapList(task) {
 			return task.data()
 		},
-		addTask() {
-			firebase
-				.firestore()
-				.collection('projects')
-				.doc('A1X83DUed6fOPqwt1iJi')
-				.collection('tasks')
-				.add(this.task)
-				.catch(console.log)
+		createTask() {
+			this.tasks.add(this.task).catch(console.log)
 		},
 		deleteTask(taskID) {
-			firebase
-				.firestore()
-				.collection('projects')
-				.doc('A1X83DUed6fOPqwt1iJi')
-				.collection('tasks')
+			this.deleteSubtasks(taskID)
+			this.tasks
 				.doc(taskID)
 				.delete()
-				.then(console.log)
+				.catch(console.log)
+		},
+		deleteSubtasks(taskID) {
+			this.tasks
+				.doc(taskID)
+				.collection('subtasks')
+				.get()
+				.then(collection => {
+					collection.docs.forEach(subtask => {
+						subtask.ref.delete().catch(console.log)
+					})
+				})
+				.catch(console.log)
 		}
 	}
 }
