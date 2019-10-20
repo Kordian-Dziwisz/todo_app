@@ -4,7 +4,9 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import SubtasksList from './subtask-list/subtask-list'
 export default {
+	components: { SubtasksList },
 	props: {
 		taskID: String
 	},

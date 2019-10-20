@@ -7,8 +7,7 @@ import 'firebase/firestore'
 export default {
 	data() {
 		return {
-			list: [],
-			addTaskData: {}
+			list: []
 		}
 	},
 	created() {
@@ -32,9 +31,9 @@ export default {
 				})
 				.catch(console.log)
 		},
-		createTask() {
-			if (this.addTaskData.title.length()) {
-				this.tasks.add(this.addTaskData).catch(console.log)
+		createTask(taskData) {
+			if (taskData.title.length()) {
+				this.tasks.add(taskData).catch(console.log)
 			}
 		},
 		deleteTask(taskID) {
