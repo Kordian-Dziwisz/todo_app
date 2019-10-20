@@ -8,10 +8,7 @@ export default {
 	data() {
 		return {
 			list: [],
-			task: {
-				title: '',
-				content: ''
-			}
+			addTaskData: {}
 		}
 	},
 	created() {
@@ -25,18 +22,20 @@ export default {
 	},
 	methods: {
 		getList() {
+			const self = this
 			this.tasks
 				.get()
-				.then(collection => {
-					this.list = collection.docs.map(this.mapList)
+				.then(function(collection) {
+					self.list = collection.docs.map(task => {
+						return task.data()
+					})
 				})
 				.catch(console.log)
 		},
-		mapList(task) {
-			return task.data()
-		},
 		createTask() {
-			this.tasks.add(this.task).catch(console.log)
+			if (this.addTaskData.title.length()) {
+				this.tasks.add(this.addTaskData).catch(console.log)
+			}
 		},
 		deleteTask(taskID) {
 			this.deleteSubtasks(taskID)
