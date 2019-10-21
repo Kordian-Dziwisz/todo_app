@@ -3,28 +3,24 @@
 		<side-bar></side-bar>
 		<div class="col-10 d-flex flex-row justify-content-around align-items-center">
 			<tasks-list></tasks-list>
-			<adding-task></adding-task>
 		</div>
 	</div>
 </template>
 
 <script>
 import SideBar from '@c/side-bar'
-import TasksList from './tasks-list'
-import AddingTask from './adding-task'
+import TasksList from './tasks-list/tasks-list'
 
 export default {
 	components: {
 		SideBar,
-		TasksList,
-		AddingTask
-
+		TasksList
 	}
 }
 </script>
 <style lang="scss" scoped>
-	body {
-		margin: 0 !important;
-		padding: 0 !important;
-	}
+body {
+	margin: 0 !important;
+	padding: 0 !important;
+}
 </style>
