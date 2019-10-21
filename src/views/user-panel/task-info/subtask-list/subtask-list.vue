@@ -35,7 +35,7 @@ export default {
 				})
 				.catch(console.log)
 		},
-		createSubtask(subtaskData) {
+		addSubtask(subtaskData) {
 			if (subtaskData) {
 				this.subtasks.add(subtaskData).catch(console.log)
 			}

@@ -3,6 +3,7 @@
 		{{task.id}}
 		{{task.title}}
 		{{task.content}}
+		{{task.isCompleted}}
 		<br />
 	</div>
 </template>

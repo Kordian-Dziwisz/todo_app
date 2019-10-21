@@ -18,11 +18,7 @@ export default {
 	components: { Task },
 	data() {
 		return {
-			list: [],
-			newTask: {
-				title: '',
-				content: ''
-			}
+			list: []
 		}
 	},
 	created() {
@@ -43,13 +39,13 @@ export default {
 		mapList(task) {
 			return { ...task.data(), id: task.id }
 		},
-		addTask() {
+		addTask(task) {
 			firebase
 				.firestore()
 				.collection('projects')
 				.doc('A1X83DUed6fOPqwt1iJi')
 				.collection('tasks')
-				.add(this.newTask)
+				.add(this.task)
 				.catch(console.log)
 		}
 	}
