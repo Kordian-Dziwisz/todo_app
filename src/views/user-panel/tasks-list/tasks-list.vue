@@ -114,7 +114,6 @@ export default {
 		},
 		addTaskToList(task) {
 			this.list.push({ ...this.newTask, id: task.id, isCompleted: false })
-			console.log(this.list)
 		},
 		deleteTask() {
 			this.tasks
