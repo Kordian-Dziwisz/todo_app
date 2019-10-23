@@ -8,6 +8,9 @@ import store from './store'
 //firebase
 import './firebase.config'
 
+//jquery
+window.$ = require('jquery')
+
 //vendor
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'

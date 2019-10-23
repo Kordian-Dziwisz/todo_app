@@ -7,13 +7,20 @@
 				<h4 class="card-title">{{task.title}}</h4>
 			</router-link>
 			<p class="card-text">{{task.description}} : {{task.isCompleted}}</p>
+			<button class="btn btn-sm btn-outline-danger" @click="deleteTask">delete</button>
 		</div>
 	</div>
 </template>
 <script>
 export default {
 	props: {
-		task: undefined
+		task: Object,
+		index: Number
+	},
+	methods: {
+		deleteTask() {
+			this.$emit('delete', this.index)
+		}
 	}
 }
 </script>
