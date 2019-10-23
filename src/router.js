@@ -10,6 +10,7 @@ export default new Router({
 	mode: 'history',
 	base: process.env.BASE_URL,
 	routes: [
+		{ path: '/', redirect: '/user-panel' },
 		{ path: '/login', name: 'login', component: Login },
 		{ path: '/register', name: 'register', component: Register },
 		{ path: '/user-panel', name: 'user-panel', component: UserPanel }
