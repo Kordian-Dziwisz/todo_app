@@ -71,6 +71,12 @@ export default {
 			)
 		}
 	},
+	mounted() {
+		self = this
+		firebase.auth().onAuthStateChanged(function(user) {
+			if (user) self.$router.push({ name: 'user-panel' })
+		})
+	},
 	methods: {
 		register() {
 			if (this.isFormCompleted) {
