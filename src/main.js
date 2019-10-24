@@ -12,6 +12,8 @@ import './firebase.config'
 window.$ = require('jquery')
 
 //vendor
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 
@@ -28,9 +30,18 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 //library for fontawesome
-library.add(faUser, faStar, faCalendarAlt, faLayerGroup, faArchive, faCog, faPlus)
+library.add(
+	faUser,
+	faStar,
+	faCalendarAlt,
+	faLayerGroup,
+	faArchive,
+	faCog,
+	faPlus
+)
 //component for fontawesome
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.use(BootstrapVue)
 
 new Vue({
 	router,
