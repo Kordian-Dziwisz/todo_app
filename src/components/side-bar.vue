@@ -61,7 +61,7 @@
 			<div class="divider fixed-bottom" id="weird-navbar-footer"></div>
 			<div class="fixed-bottom d-flex justify-content-between" id="my-navbar-footer">
 				<button class="btn">
-					<font-awesome-icon :icon="['fas', 'plus']" /> Nowe zadanie
+					<font-awesome-icon :icon="['fas', 'plus']" /> Nowy projekt
 				</button>
 				<button class="btn">
 					<font-awesome-icon :icon="['fas', 'cog']" />

@@ -1,5 +1,5 @@
 <template>
-	<div class="card h-50 col-5">
+	<div class="card h-75 col-7" id="my-tasks-list">
 		<task
 			v-for="(task, index) in list"
 			:key="task.id"
@@ -7,8 +7,6 @@
 			:index="index"
 			@delete="toggleDeleteModal"
 		></task>
-		<button type="button" class="btn btn-primary" @click="toggleAddModal">Button</button>
-
 		<div class="modal fade" id="addModal" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -57,20 +55,22 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-outline-danger" @click="toggleDeleteModal">Close</button>
-						<button type="button" class="btn btn-primary" @click="deleteTask">Delete Task</button>
+						<button @click="deleteTask" class="btn" type="button">Delete Task</button>
 					</div>
 				</div>
 			</div>
 		</div>
+		<button @click="toggleAddModal" class="btn btn-primary -align-left" id="my-add-task-button" type="button"><font-awesome-icon :icon="['fas', 'plus']" /></button>
 	</div>
 </template>
 <script>
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/auth'
-import Task from './task'
-import { isNumber } from 'util'
-export default {
+	import firebase from 'firebase/app'
+	import 'firebase/firestore'
+	import 'firebase/auth'
+	import Task from './task'
+	import {isNumber} from 'util'
+
+	export default {
 	components: { Task },
 	data() {
 		return {
@@ -137,4 +137,20 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+	#my-tasks-list {
+		margin-top: 50px;
+		display: flex;
+		overflow-y: scroll;
+
+	}
+	#my-add-task-button {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		position: fixed;
+		top: 92vh;
+		left: 94vw;
+		border: none;
+
+	}
 </style>

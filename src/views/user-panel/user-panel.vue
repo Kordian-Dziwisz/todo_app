@@ -1,17 +1,17 @@
 <template>
-	<div class="h-100 row">
+	<div class="vh-100 row">
 		<side-bar></side-bar>
-		<div class="col-10 d-flex flex-row justify-content-around align-items-center">
+		<div class="col-10 d-flex flex-row justify-content-around vh-100">
 			<tasks-list></tasks-list>
 		</div>
 	</div>
 </template>
 
 <script>
-import SideBar from '@c/side-bar'
-import TasksList from './tasks-list/tasks-list'
+	import SideBar from '@c/side-bar'
+	import TasksList from './tasks-list/tasks-list'
 
-export default {
+	export default {
 	components: {
 		SideBar,
 		TasksList
