@@ -9,7 +9,7 @@
 
 <script>
 	import SideBar from '@c/side-bar'
-	import TasksList from './tasks-list/tasks-list'
+	import TasksList from '@c/user-panel/tasks-list/tasks-list'
 
 	export default {
 	components: {

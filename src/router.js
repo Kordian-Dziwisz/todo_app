@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@v/login'
 import Register from '@v/register'
-import UserPanel from '@v/user-panel/user-panel.vue'
+import UserPanel from '@v/user-panel.vue'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
 	mode: 'history',

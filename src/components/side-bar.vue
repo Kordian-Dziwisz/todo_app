@@ -64,7 +64,7 @@
 					<font-awesome-icon :icon="['fas', 'plus']" /> Nowy projekt
 				</button>
 				<button class="btn">
-					<font-awesome-icon :icon="['fas', 'cog']" />
+					<font-awesome-icon :icon="['fas', 'cog']" id="my-cog"/>
 				</button>
 			</div>
 		</nav>
@@ -92,6 +92,23 @@
 	margin-top: 30px;
 	margin-bottom: 30px;
 }
+	#my-cog:hover {
+		-webkit-animation: rotating 2s linear infinite;
+
+	}
+	@keyframes rotating {
+		from {
+			-webkit-transform: rotate(0deg);
+			-o-transform: rotate(0deg);
+			transform: rotate(0deg);
+		}
+		to {
+			-webkit-transform: rotate(360deg);
+			-o-transform: rotate(360deg);
+			transform: rotate(360deg);
+
+		}
+	}
 </style>
 
 <script>
