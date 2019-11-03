@@ -8,10 +8,10 @@
 </template>
 
 <script>
-	import SideBar from '@c/side-bar'
-	import TasksList from '@c/user-panel/tasks-list/tasks-list'
+import SideBar from '@c/side-bar'
+import TasksList from '@c/user-panel/tasks-list/tasks-list'
 
-	export default {
+export default {
 	components: {
 		SideBar,
 		TasksList
