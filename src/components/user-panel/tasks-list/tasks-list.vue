@@ -5,72 +5,61 @@
 			:key="task.id"
 			:task="task"
 			:index="index"
-			@delete="toggleDeleteModal"
+			@delete="toggleDeleteModal = true"
 		></task>
-		<div class="modal fade" id="addModal" tabindex="-1">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Modal title</h5>
-						<button type="button" class="close" @click="toggleAddModal">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<form @submit.prevent="addTask">
-							<input type="text" class="form-control" v-model="newTask.title" placeholder="title" />
-							<label>
-								<small>Title</small>
-							</label>
-							<input
-								type="text"
-								class="form-control"
-								v-model="newTask.description"
-								placeholder="description"
-							/>
-							<label>
-								<small>Description</small>
-							</label>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-outline-danger" @click="toggleAddModal">Close</button>
-						<button type="button" class="btn btn-primary" @click="addTask">Add Task</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		<b-button @click="toggleAddModal = true" id="my-add-task-button" variant="primary">
+			<font-awesome-icon :icon="['fas', 'plus']" />
+		</b-button>
 
-		<div class="modal fade" id="deleteModal" tabindex="-1">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Modal title</h5>
-						<button type="button" class="close" @click="toggleDeleteModal">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<p>Do you really want to delete?</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-outline-danger" @click="toggleDeleteModal">Close</button>
-						<button @click="deleteTask" class="btn" type="button">Delete Task</button>
-					</div>
-				</div>
+		<b-modal
+			title="Usuwanie zadania"
+			@hide="toggleDeleteModal = true"
+			v-model="toggleDeleteModal"
+			:lazy="true"
+		>
+			<p>Czy chcesz usunąć to zadanie?</p>
+			<div slot="modal-footer" class="w-100">
+				<b-button class="float-right ml-1" variant="outline-primary">Usuń</b-button>
+				<b-button class="float-right" variant="outline-danger" @click="toggleDeleteModal = false">Anuluj</b-button>
 			</div>
-		</div>
-		<button @click="toggleAddModal" class="btn btn-primary -align-left" id="my-add-task-button" type="button"><font-awesome-icon :icon="['fas', 'plus']" /></button>
+		</b-modal>
+
+		<b-modal
+			title="Dodaj nowe zadanie"
+			@hide="toggleAddModal = false"
+			v-model="toggleAddModal"
+			:lazy="true"
+		>
+			<form @submit.prevent="addTask">
+				<b-form-group>
+					<label for="titleInput">Tytuł:</label>
+					<b-form-input id="titleInput" type="text" v-model="newTask.title" placeholder="Tytuł zadania"></b-form-input>
+				</b-form-group>
+				<b-form-group>
+					<label for="descriptionInput">Opis:</label>
+					<b-form-input
+						id="descriptionInput"
+						type="text"
+						v-model="newTask.description"
+						placeholder="Opis zadania"
+					></b-form-input>
+				</b-form-group>
+			</form>
+			<div slot="modal-footer" class="w-100">
+				<b-button class="float-right ml-1" variant="outline-primary" @click="addTask">Dodaj zadanie</b-button>
+				<b-button class="float-right" variant="outline-danger" @click="toggleAddModal = false">Anuluj</b-button>
+			</div>
+		</b-modal>
 	</div>
 </template>
 <script>
-	import firebase from 'firebase/app'
-	import 'firebase/firestore'
-	import 'firebase/auth'
-	import Task from './task'
-	import {isNumber} from 'util'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
+import Task from './task'
+import { isNumber } from 'util'
 
-	export default {
+export default {
 	components: { Task },
 	data() {
 		return {
@@ -79,7 +68,9 @@
 			newTask: {
 				title: '',
 				description: ''
-			}
+			},
+			toggleAddModal: false,
+			toggleDeleteModal: false
 		}
 	},
 	created() {
@@ -108,8 +99,8 @@
 					.collection('tasks')
 					.add({ ...this.newTask, isCompleted: false })
 					.then(this.addTaskToList)
-					.catch(console.log)
-				this.toggleAddModal()
+					.catch(console.log),
+					(this.toggleAddModal = false)
 			}
 		},
 		addTaskToList(task) {
@@ -125,32 +116,30 @@
 		},
 		deleteTaskInLIst() {
 			this.list.splice(this.deleteIndex, 1)
-		},
-		toggleAddModal() {
-			$('#addModal').modal('toggle')
-		},
-		toggleDeleteModal(index) {
-			if (isNumber(index)) this.deleteIndex = index
-			$('#deleteModal').modal('toggle')
 		}
+		// toggleAddModal() {
+		// 	$('#addModal').modal('toggle')
+		// },
+		// toggleDeleteModal(index) {
+		// 	if (isNumber(index)) this.deleteIndex = index
+		// 	$('#deleteModal').modal('toggle')
+		// }
 	}
 }
 </script>
 <style lang="scss" scoped>
-	#my-tasks-list {
-		margin-top: 50px;
-		display: flex;
-		overflow-y: scroll;
-
-	}
-	#my-add-task-button {
-		width: 50px;
-		height: 50px;
-		border-radius: 50%;
-		position: fixed;
-		top: 92vh;
-		left: 94vw;
-		border: none;
-
-	}
+#my-tasks-list {
+	margin-top: 50px;
+	display: flex;
+	overflow-y: scroll;
+}
+#my-add-task-button {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	position: fixed;
+	top: 92vh;
+	left: 94vw;
+	border: none;
+}
 </style>
