@@ -5,32 +5,27 @@
 			<ul class="navbar-nav">
 				<li class="nav-item">
 					<a class="nav-link" href="/user-panel">
-						<font-awesome-icon :icon="['fas', 'user']" class="fa-fw" />
-						Panel użytkownika
+						<font-awesome-icon :icon="['fas', 'user']" class="fa-fw" />Panel użytkownika
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/user-panel">
-						<font-awesome-icon :icon="['fas', 'star']" class="fa-fw" />
-						Dzisiaj
+						<font-awesome-icon :icon="['fas', 'star']" class="fa-fw" />Dzisiaj
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/user-panel">
-						<font-awesome-icon :icon="['fas', 'calendar-alt']" class="fa-fw" />
-						Natchodzące
+						<font-awesome-icon :icon="['fas', 'calendar-alt']" class="fa-fw" />Nadchodzące
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/user-panel">
-						<font-awesome-icon :icon="['fas', 'layer-group']" class="fa-fw" />
-						Kiedyś
+						<font-awesome-icon :icon="['fas', 'layer-group']" class="fa-fw" />Kiedyś
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/user-panel">
-						<font-awesome-icon :icon="['fas', 'archive']" class="fa-fw" />
-						Wszystkie zadania
+						<font-awesome-icon :icon="['fas', 'archive']" class="fa-fw" />Wszystkie zadania
 					</a>
 				</li>
 			</ul>
@@ -61,10 +56,10 @@
 			<div class="divider fixed-bottom" id="weird-navbar-footer"></div>
 			<div class="fixed-bottom d-flex justify-content-between" id="my-navbar-footer">
 				<button class="btn">
-					<font-awesome-icon :icon="['fas', 'plus']" /> Nowy projekt
+					<font-awesome-icon :icon="['fas', 'plus']" />&nbsp;Nowy projekt
 				</button>
 				<button class="btn">
-					<font-awesome-icon :icon="['fas', 'cog']" id="my-cog"/>
+					<font-awesome-icon :icon="['fas', 'cog']" id="my-cog" />
 				</button>
 			</div>
 		</nav>
@@ -92,23 +87,21 @@
 	margin-top: 30px;
 	margin-bottom: 30px;
 }
-	#my-cog:hover {
-		-webkit-animation: rotating 2s linear infinite;
-
+#my-cog:hover {
+	-webkit-animation: rotating 2s linear infinite;
+}
+@keyframes rotating {
+	from {
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
 	}
-	@keyframes rotating {
-		from {
-			-webkit-transform: rotate(0deg);
-			-o-transform: rotate(0deg);
-			transform: rotate(0deg);
-		}
-		to {
-			-webkit-transform: rotate(360deg);
-			-o-transform: rotate(360deg);
-			transform: rotate(360deg);
-
-		}
+	to {
+		-webkit-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
 	}
+}
 </style>
 
 <script>
