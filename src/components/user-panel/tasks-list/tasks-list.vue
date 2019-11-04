@@ -5,31 +5,25 @@
 			:key="task.id"
 			:task="task"
 			:index="index"
-			@delete="toggleDeleteModal = true"
+			@delete="toggleDeleteModal"
 		></task>
-		<b-button @click="toggleAddModal = true" id="my-add-task-button" variant="primary">
+		<b-button @click="toggleAddModal" id="my-add-task-button" variant="primary">
 			<font-awesome-icon :icon="['fas', 'plus']" />
 		</b-button>
 
-		<b-modal
-			title="Usuwanie zadania"
-			@hide="toggleDeleteModal = true"
-			v-model="toggleDeleteModal"
-			:lazy="true"
-		>
+		<b-modal title="Usuwanie zadania" v-model="isDeleteModalVisible" :lazy="true">
 			<p>Czy chcesz usunąć to zadanie?</p>
 			<div slot="modal-footer" class="w-100">
-				<b-button class="float-right ml-1" variant="outline-primary">Usuń</b-button>
-				<b-button class="float-right" variant="outline-danger" @click="toggleDeleteModal = false">Anuluj</b-button>
+				<b-button class="float-right ml-1" variant="outline-primary" @click="deleteTask">Usuń</b-button>
+				<b-button
+					class="float-right"
+					variant="outline-danger"
+					@click="isDeleteModalVisible = false"
+				>Anuluj</b-button>
 			</div>
 		</b-modal>
 
-		<b-modal
-			title="Dodaj nowe zadanie"
-			@hide="toggleAddModal = false"
-			v-model="toggleAddModal"
-			:lazy="true"
-		>
+		<b-modal title="Dodaj nowe zadanie" v-model="isAddModalVisible" :lazy="true">
 			<form @submit.prevent="addTask">
 				<b-form-group>
 					<label for="titleInput">Tytuł:</label>
@@ -47,7 +41,7 @@
 			</form>
 			<div slot="modal-footer" class="w-100">
 				<b-button class="float-right ml-1" variant="outline-primary" @click="addTask">Dodaj zadanie</b-button>
-				<b-button class="float-right" variant="outline-danger" @click="toggleAddModal = false">Anuluj</b-button>
+				<b-button class="float-right" variant="outline-danger" @click="toggleAddModal">Anuluj</b-button>
 			</div>
 		</b-modal>
 	</div>
@@ -69,8 +63,8 @@ export default {
 				title: '',
 				description: ''
 			},
-			toggleAddModal: false,
-			toggleDeleteModal: false
+			isAddModalVisible: false,
+			isDeleteModalVisible: false
 		}
 	},
 	created() {
@@ -100,7 +94,7 @@ export default {
 					.add({ ...this.newTask, isCompleted: false })
 					.then(this.addTaskToList)
 					.catch(console.log),
-					(this.toggleAddModal = false)
+					this.toggleAddModal()
 			}
 		},
 		addTaskToList(task) {
@@ -116,14 +110,14 @@ export default {
 		},
 		deleteTaskInLIst() {
 			this.list.splice(this.deleteIndex, 1)
+		},
+		toggleAddModal() {
+			this.isAddModalVisible = !this.isAddModalVisible
+		},
+		toggleDeleteModal(index) {
+			if (isNumber(index)) this.deleteIndex = index
+			this.isDeleteModalVisible = !this.isDeleteModalVisible
 		}
-		// toggleAddModal() {
-		// 	$('#addModal').modal('toggle')
-		// },
-		// toggleDeleteModal(index) {
-		// 	if (isNumber(index)) this.deleteIndex = index
-		// 	$('#deleteModal').modal('toggle')
-		// }
 	}
 }
 </script>
