@@ -27,9 +27,6 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.config.productionTip = false
 
-//jquery
-window.$ = require('jquery')
-
 //library for fontawesome
 library.add(
 	faUser,
