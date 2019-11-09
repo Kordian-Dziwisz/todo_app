@@ -5,27 +5,27 @@
 			<ul class="navbar-nav">
 				<li class="nav-item">
 					<a class="nav-link" href="/user-panel">
-						<font-awesome-icon :icon="['fas', 'user']" class="fa-fw" />Panel użytkownika
+						<i class="fas fa-user fa-fw"></i> Panel użytkownika
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/user-panel">
-						<font-awesome-icon :icon="['fas', 'star']" class="fa-fw" />Dzisiaj
+						<i class="fas fa-star fa-fw"></i> Dzisiaj
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/user-panel">
-						<font-awesome-icon :icon="['fas', 'calendar-alt']" class="fa-fw" />Nadchodzące
+						<i class="fas fa-calendar-alt fa-fw"></i> Nadchodzące
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/user-panel">
-						<font-awesome-icon :icon="['fas', 'layer-group']" class="fa-fw" />Kiedyś
+						<i class="fas fa-layer-group fa-fw"></i> Kiedyś
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/user-panel">
-						<font-awesome-icon :icon="['fas', 'archive']" class="fa-fw" />Wszystkie zadania
+						<i class="fas fa-archive fa-fw"></i> Wszystkie zadania
 					</a>
 				</li>
 			</ul>
@@ -56,10 +56,10 @@
 			<div class="divider fixed-bottom" id="weird-navbar-footer"></div>
 			<div class="fixed-bottom d-flex justify-content-between" id="my-navbar-footer">
 				<button class="btn">
-					<font-awesome-icon :icon="['fas', 'plus']" />&nbsp;Nowy projekt
+					<i class="fas fa-plus fa-fw"></i> Nowy projekt
 				</button>
 				<button class="btn">
-					<font-awesome-icon :icon="['fas', 'cog']" id="my-cog" />
+					<i class="fas fa-cog fa-fw"></i>
 				</button>
 			</div>
 		</nav>
