@@ -66,11 +66,9 @@
 	</div>
 </template>
 <script>
-import firebase from 'firebase/auth'
-import 'firebase/auth'
 export default {
 	methods: {
-		signOut() {
+		logout() {
 			this.$router.push({ name: 'login' })
 		}
 	}
@@ -114,7 +112,3 @@ export default {
 	}
 }
 </style>
-
-<script>
-export default {}
-</script>
