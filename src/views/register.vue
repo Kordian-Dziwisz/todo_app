@@ -60,6 +60,18 @@ export default {
 			name: ''
 		}
 	},
+	created() {
+		const self = this
+		firebase.auth().signOut()
+		firebase.auth().onAuthStateChanged(user => {
+			if (user) {
+				this.$router.push({
+					name: 'user-panel',
+					query: { projectID: 'A1X83DUed6fOPqwt1iJi' }
+				})
+			}
+		})
+	},
 	computed: {
 		isFormCompleted() {
 			return (
