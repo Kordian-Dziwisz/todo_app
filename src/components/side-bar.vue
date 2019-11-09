@@ -71,7 +71,7 @@ import 'firebase/auth'
 export default {
 	methods: {
 		signOut() {
-			firebase.auth().signOut()
+			this.$router.push({ name: 'login' })
 		}
 	}
 }
