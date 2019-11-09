@@ -86,11 +86,7 @@ export default {
 		},
 		addTask() {
 			if (this.newTask.title.length) {
-				firebase
-					.firestore()
-					.collection('projects')
-					.doc('A1X83DUed6fOPqwt1iJi')
-					.collection('tasks')
+				this.tasks
 					.add({ ...this.newTask, isCompleted: false })
 					.then(this.addTaskToList)
 					.catch(console.log),
