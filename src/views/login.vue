@@ -41,6 +41,18 @@ export default {
 			password: ''
 		}
 	},
+	created() {
+		const self = this
+		firebase.auth().signOut()
+		firebase.auth().onAuthStateChanged(user => {
+			if (user) {
+				self.$router.push({
+					name: 'user-panel',
+					query: { projectID: 'A1X83DUed6fOPqwt1iJi' }
+				})
+			}
+		})
+	},
 	methods: {
 		login() {
 			firebase
