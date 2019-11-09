@@ -65,6 +65,17 @@
 		</nav>
 	</div>
 </template>
+<script>
+import firebase from 'firebase/auth'
+import 'firebase/auth'
+export default {
+	methods: {
+		signOut() {
+			firebase.auth().signOut()
+		}
+	}
+}
+</script>
 <style scoped lang="scss">
 #my-navbar-footer {
 	text-align: right;
