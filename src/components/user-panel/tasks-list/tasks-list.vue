@@ -49,10 +49,8 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import 'firebase/auth'
 import Task from './task'
 import { isNumber } from 'util'
-
 export default {
 	components: { Task },
 	data() {
@@ -64,7 +62,8 @@ export default {
 				description: ''
 			},
 			isAddModalVisible: false,
-			isDeleteModalVisible: false
+			isDeleteModalVisible: false,
+			tasks: undefined
 		}
 	},
 	created() {
