@@ -51,6 +51,7 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import 'firebase/firestore'
 export default {
 	data() {
 		return {
@@ -65,9 +66,9 @@ export default {
 		firebase.auth().signOut()
 		firebase.auth().onAuthStateChanged(user => {
 			if (user) {
+				self.addUserToFirestore(user)
 				this.$router.push({
-					name: 'user-panel',
-					query: { projectID: 'A1X83DUed6fOPqwt1iJi' }
+					name: 'user-panel'
 				})
 			}
 		})
@@ -84,6 +85,14 @@ export default {
 		}
 	},
 	methods: {
+		addUserToFirestore(user) {
+			console.log('adding user to firestore', user)
+			firebase
+				.firestore()
+				.collection('users')
+				.doc(user.uid)
+				.set({ email: this.email, name: this.name })
+		},
 		register() {
 			if (this.isFormCompleted) {
 				firebase
