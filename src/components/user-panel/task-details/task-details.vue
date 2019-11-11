@@ -16,7 +16,7 @@
 				<p>{{taskData.description}}</p>
 			</div>
 		</div>
-		<subtasks-list></subtasks-list>
+		<!-- <subtasks-list></subtasks-list> -->
 	</div>
 </template>
 <script>
