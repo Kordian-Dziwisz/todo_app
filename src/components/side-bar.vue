@@ -5,7 +5,7 @@
 			<ul class="navbar-nav">
 				<li class="nav-item">
 					<a class="nav-link" href="/user-panel">
-						<font-awesome-icon :icon="['fas', 'user']" class="fa-fw" />Panel użytkownika
+						<font-awesome-  :icon="['fas', 'user']" class="fa-fw" />Panel użytkownika
 					</a>
 				</li>
 				<li class="nav-item">
@@ -58,9 +58,14 @@
 				<button class="btn">
 					<font-awesome-icon :icon="['fas', 'plus']" />&nbsp;Nowy projekt
 				</button>
-				<button class="btn">
-					<font-awesome-icon :icon="['fas', 'cog']" id="my-cog" />
-				</button>
+				<b-button-group>
+					<button class="btn">
+						<font-awesome-icon :icon="['fas', 'cog']" id="my-cog" />
+					</button>
+					<button class="btn">
+						<font-awesome-icon :icon="['fas', 'door-open']" @click="logout"></font-awesome-icon>
+					</button>
+				</b-button-group>
 			</div>
 		</nav>
 	</div>

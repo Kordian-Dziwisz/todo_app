@@ -11,11 +11,12 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 //fontawesome
-import { library } from '@fortawesome/fontawesome-svg-core'
+import {library} from '@fortawesome/fontawesome-svg-core'
 import {
 	faArchive,
 	faCalendarAlt,
 	faCog,
+	faDoorOpen,
 	faEllipsisV,
 	faLayerGroup,
 	faPlus,
@@ -23,7 +24,7 @@ import {
 	faTrashAlt,
 	faUser
 } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 
 Vue.config.productionTip = false
 
@@ -37,7 +38,8 @@ library.add(
 	faCog,
 	faPlus,
 	faEllipsisV,
-	faTrashAlt
+	faTrashAlt,
+	faDoorOpen
 )
 //component for fontawesome
 Vue.component('font-awesome-icon', FontAwesomeIcon)
