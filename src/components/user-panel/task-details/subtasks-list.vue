@@ -1,5 +1,5 @@
 <template>
-	<div></div>
+	<div>subtasks-list</div>
 </template>
 <script>
 import firebase from 'firebase/app'

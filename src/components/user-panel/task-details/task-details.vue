@@ -1,5 +1,23 @@
 <template>
-	<div></div>
+	<div class="card h-75 col-7" id="margin-top">
+		<div class="row">
+			<div class="col-6">
+				<label>Nazwa:</label>
+				<p>{{taskData.title}}</p>
+			</div>
+			<div class="col-6">
+				<label>Status:</label>
+				<p>{{taskData.isCompleted}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<label>Opis:</label>
+				<p>{{taskData.description}}</p>
+			</div>
+		</div>
+		<subtasks-list></subtasks-list>
+	</div>
 </template>
 <script>
 import firebase from 'firebase/app'
@@ -55,3 +73,10 @@ export default {
 	}
 }
 </script>
+<style scoped>
+#margin-top {
+	margin-top: 50px;
+	display: flex;
+	overflow-y: scroll;
+}
+</style>
