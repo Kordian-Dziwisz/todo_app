@@ -3,7 +3,7 @@
 		<side-bar></side-bar>
 		<b-col class="d-flex flex-row justify-content-around vh-100" lg="10" md="10" sm="10">
 			<tasks-list v-show="!isTaskVisible" @openTask="openTask"></tasks-list>
-			<task-details v-if="isTaskVisible" :taskID="taskID" :key="taskID"></task-details>
+			<task-details v-if="taskID.length" v-show="isTaskVisible" :taskID="taskID" :key="taskID"></task-details>
 		</b-col>
 	</b-row>
 </template>
