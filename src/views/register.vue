@@ -1,58 +1,60 @@
 <template>
-	<form class="container w-50" @submit.prevent="register">
+	<b-form @submit.prevent="register" class="container w-50">
 		<h3>Wypełnij formularz, aby się zarejestrować</h3>
-		<div class="form-group">
+		<b-form-control>
 			<label for="name">Imię:</label>
-			<input
+			<b-input
 				type="text"
 				class="form-control"
 				placeholder="Wpisz imię"
 				id="name"
 				v-model="name"
 				required
-			/>
-		</div>
-		<div class="form-group">
+			></b-input>
+		</b-form-control>
+		<b-form-control>
 			<label for="email">Email:</label>
-			<input
+			<b-input
 				type="email"
 				class="form-control"
 				placeholder="Wpisz email"
 				id="email"
 				v-model="email"
 				required
-			/>
-		</div>
-		<div class="form-group">
+			></b-input>
+		</b-form-control>
+		<b-form-control>
 			<label for="password">Hasło:</label>
-			<input
+			<b-input
 				type="password"
 				class="form-control"
 				placeholder="Wpisz hasło:"
 				id="password"
 				v-model="password"
 				required
-			/>
-		</div>
-		<div class="form-group">
+			></b-input>
+		</b-form-control>
+		<b-form-control>
 			<label for="password">Powtórz hasło:</label>
-			<input
+			<b-input
 				type="password"
 				class="form-control"
 				placeholder="Powtórz hasło:"
 				id="password-confirm"
 				v-model="passwordConfirm"
 				required
-			/>
-		</div>
-		<button class="btn btn-primary" type="submit">Wyślij</button>
-	</form>
+			></b-input>
+		</b-form-control>
+		<br>
+		<b-button type="submit" variant="primary">Wyślij</b-button>
+	</b-form>
 </template>
 <script>
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firestore'
-export default {
+    import firebase from 'firebase/app'
+    import 'firebase/auth'
+    import 'firebase/firestore'
+
+    export default {
 	data() {
 		return {
 			email: '',

@@ -24,7 +24,7 @@
 		</b-modal>
 
 		<b-modal title="Dodaj nowe zadanie" v-model="isAddModalVisible" :lazy="true">
-			<form @submit.prevent="addTask">
+			<b-form @submit.prevent="addTask">
 				<b-form-group>
 					<label for="titleInput">Tytuł:</label>
 					<b-form-input id="titleInput" type="text" v-model="newTask.title" placeholder="Tytuł zadania"></b-form-input>
@@ -38,7 +38,7 @@
 						placeholder="Opis zadania"
 					></b-form-input>
 				</b-form-group>
-			</form>
+			</b-form>
 			<div slot="modal-footer" class="w-100">
 				<b-button class="float-right ml-1" variant="outline-primary" @click="addTask">Dodaj zadanie</b-button>
 				<b-button class="float-right" variant="outline-danger" @click="toggleAddModal">Anuluj</b-button>
@@ -47,11 +47,12 @@
 	</div>
 </template>
 <script>
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import Task from './task'
-import { isNumber } from 'util'
-export default {
+	import firebase from 'firebase/app'
+	import 'firebase/firestore'
+	import Task from './task'
+	import {isNumber} from 'util'
+
+	export default {
 	components: { Task },
 	data() {
 		return {

@@ -28,14 +28,14 @@
 			<router-link to="/register">Zarejestruj się</router-link>
 		</small>
 		<br />
-		<button class="btn btn-primary" type="submit">Zaloguj się</button>
+		<b-button type="submit" variant="primary">Zaloguj się</b-button>
 	</b-form>
 </template>
 <script>
-	import firebase from 'firebase/app'
-	import 'firebase/auth'
+    import firebase from 'firebase/app'
+    import 'firebase/auth'
 
-	export default {
+    export default {
 	data() {
 		return {
 			email: '',
