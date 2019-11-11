@@ -27,7 +27,6 @@ export default {
 	},
 	methods: {
 		openTask(taskID) {
-			console.log('openTask')
 			this.taskID = taskID
 			this.isTaskVisible = true
 		}
