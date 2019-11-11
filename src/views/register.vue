@@ -86,7 +86,6 @@ export default {
 	},
 	methods: {
 		addUserToFirestore(user) {
-			console.log('adding user to firestore', user)
 			firebase
 				.firestore()
 				.collection('users')
