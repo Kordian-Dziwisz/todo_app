@@ -6,6 +6,7 @@
 			:task="task"
 			:index="index"
 			@delete="toggleDeleteModal"
+			@open="openTask"
 		></task>
 		<b-button @click="toggleAddModal" id="my-add-task-button" variant="primary">
 			<font-awesome-icon :icon="['fas', 'plus']" />
@@ -112,6 +113,9 @@ export default {
 		toggleDeleteModal(index) {
 			if (isNumber(index)) this.deleteIndex = index
 			this.isDeleteModalVisible = !this.isDeleteModalVisible
+		},
+		openTask(taskID) {
+			this.$emit('openTask', taskID)
 		}
 	}
 }
