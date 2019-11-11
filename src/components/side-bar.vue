@@ -71,10 +71,33 @@
 	</div>
 </template>
 <script>
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 export default {
+	data() {
+		return {
+			projectsList: [],
+			projects: undefined
+		}
+	},
+	created() {
+		this.projects = firebase.firestore().collection('projects')
+		this.getProjectsList()
+	},
 	methods: {
 		logout() {
 			this.$router.push({ name: 'login' })
+		},
+		getProjectsList() {
+			this.projects.get().then(projects => {
+				this.projectsList = projects.docs.map(this.mapProjectsList)
+			})
+		},
+		mapProjectsList(project) {
+			return {
+				...project.data(),
+				id: project.id
+			}
 		}
 	}
 }
