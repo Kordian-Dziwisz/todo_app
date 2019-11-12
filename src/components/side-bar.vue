@@ -1,22 +1,22 @@
 <template>
 	<b-col class="m-0 bg-light" lg="2" md="2" sm="2">
 		<b-nav class="vh-100" id="my-navbar" vertical>
-            <b-navbar-brand href="/user-panel">todo_app</b-navbar-brand>
+			<b-navbar-brand href="/user-panel">todo_app</b-navbar-brand>
 			<b-navbar-nav>
 				<b-nav-item href="/user-panel">
-                    <font-awesome-icon :icon="['fas', 'user']" class="fa-fw a-secondary" /> Panel użytkownika
+					<font-awesome-icon :icon="['fas', 'user']" class="fa-fw a-secondary" />Panel użytkownika
 				</b-nav-item>
 				<b-nav-item href="/user-panel">
-                    <font-awesome-icon :icon="['fas', 'star']" class="fa-fw" /> Dzisiaj
+					<font-awesome-icon :icon="['fas', 'star']" class="fa-fw" />Dzisiaj
 				</b-nav-item>
 				<b-nav-item href="/user-panel">
-					<font-awesome-icon :icon="['fas', 'calendar-alt']" class="fa-fw" /> Nadchodzące
+					<font-awesome-icon :icon="['fas', 'calendar-alt']" class="fa-fw" />Nadchodzące
 				</b-nav-item>
 				<b-nav-item href="/user-panel">
-					<font-awesome-icon :icon="['fas', 'layer-group']" class="fa-fw" /> Kiedyś
+					<font-awesome-icon :icon="['fas', 'layer-group']" class="fa-fw" />Kiedyś
 				</b-nav-item>
 				<b-nav-item href="/user-panel">
-                    <font-awesome-icon :icon="['fas', 'archive']" class="fa-fw" /> Wszystkie zadania
+					<font-awesome-icon :icon="['fas', 'archive']" class="fa-fw" />Wszystkie zadania
 				</b-nav-item>
 			</b-navbar-nav>
 			<div class="divider"></div>
@@ -43,9 +43,16 @@
 				</ul>
 			</ul>
 			-->
+			<ul>
+				<li :v-if="projectsList.length" v-for="(project, index) in projectsList" :key="project.id">
+					<router-link :to="{name: 'user-panel', query: {projectID: project.id}}">{{project.id}}</router-link>
+					<button @click="toggleDeleteModal(index)">Delete project</button>
+					<!-- <b-button @click="logList"></b-button> -->
+				</li>
+			</ul>
 			<div class="divider fixed-bottom" id="weird-navbar-footer"></div>
 			<div class="fixed-bottom d-flex justify-content-between" id="my-navbar-footer">
-				<b-btn variant="link">
+				<b-btn variant="link" @click="toggleAddModal">
 					<font-awesome-icon :icon="['fas', 'plus']" />
 				</b-btn>
 				<b-button-group>
@@ -57,18 +64,50 @@
 					</b-btn>
 				</b-button-group>
 			</div>
+			<b-modal title="Usuwanie projektu" v-model="isDeleteModalVisible" :lazy="true">
+				<p>Czy chcesz usunąć ten projekt?</p>
+				<div slot="modal-footer" class="w-100">
+					<b-button class="float-right ml-1" variant="outline-primary" @click="deleteProject">Usuń</b-button>
+					<b-button class="float-right" variant="outline-danger" @click="toggleDeleteModal">Anuluj</b-button>
+				</div>
+			</b-modal>
+			<b-modal title="Dodaj nowy projekt" v-model="isAddModalVisible" :lazy="true">
+				<b-form @submit.prevent="addProject">
+					<b-form-group>
+						<label for="titleInput">Tytuł:</label>
+						<b-form-input
+							id="titleInput"
+							type="text"
+							v-model="newProject.title"
+							placeholder="Tytuł projektu"
+						></b-form-input>
+					</b-form-group>
+				</b-form>
+				<div slot="modal-footer" class="w-100">
+					<b-button class="float-right ml-1" variant="outline-primary" @click="addProject">Dodaj projekt</b-button>
+					<b-button class="float-right" variant="outline-danger" @click="toggleAddModal">Anuluj</b-button>
+				</div>
+			</b-modal>
 		</b-nav>
 	</b-col>
 </template>
 <script>
-    import firebase from 'firebase/app'
-    import 'firebase/firestore'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
+import { isNumber } from 'util'
 
-    export default {
+export default {
 	data() {
 		return {
 			projectsList: [],
-			projects: undefined
+			projects: undefined,
+			newProject: {
+				title: ''
+			},
+			isAddModalVisible: false,
+			isDeleteModalVisible: false,
+			deleteIndex: Number
 		}
 	},
 	created() {
@@ -76,6 +115,9 @@
 		this.getProjectsList()
 	},
 	methods: {
+		logList() {
+			console.log(this.projectsList)
+		},
 		logout() {
 			this.$router.push({ name: 'login' })
 		},
@@ -89,6 +131,44 @@
 				...project.data(),
 				id: project.id
 			}
+		},
+		addProject() {
+			if (this.newProject.title.length) {
+				this.projects
+					.add({
+						...this.newProject,
+						creatorUID: firebase.auth().currentUser.uid
+					})
+					.then(this.addProjectToList)
+					.catch(console.log)
+				this.addProjectToList()
+				this.toggleAddModal()
+			}
+		},
+		addProjectToList(project) {
+			this.projectsList.push({
+				...this.newProject,
+				id: project.id,
+				creatorUID: firebase.auth().currentUser.uid
+			})
+		},
+		toggleAddModal() {
+			this.isAddModalVisible = !this.isAddModalVisible
+		},
+		deleteProject() {
+			this.projects
+				.doc(this.projectsList[this.deleteIndex].id)
+				.delete()
+				.catch(console.log())
+			this.deleteProjectInLIst()
+			this.toggleDeleteModal()
+		},
+		deleteProjectInLIst() {
+			this.projectsList.splice(this.deleteIndex, 1)
+		},
+		toggleDeleteModal(index) {
+			if (isNumber(index)) this.deleteIndex = index
+			this.isDeleteModalVisible = !this.isDeleteModalVisible
 		}
 	}
 }
