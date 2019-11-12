@@ -1,9 +1,22 @@
 <template>
 	<b-row class="vh-100">
-		<side-bar></side-bar>
+		<side-bar @openProject="openProject"></side-bar>
 		<b-col class="d-flex flex-row justify-content-around vh-100" lg="10" md="10" sm="10">
-			<tasks-list v-show="!isTaskVisible" @openTask="openTask"></tasks-list>
-			<task-details v-if="taskID.length" v-show="isTaskVisible" :taskID="taskID" :key="taskID"></task-details>
+			<task-details
+				v-if="taskID"
+				v-show="isTaskVisible"
+				:projectID="projectID"
+				:taskID="taskID"
+				:key="taskID"
+			></task-details>
+			<tasks-list
+				v-else-if="projectID"
+				v-show="!isTaskVisible"
+				:projectID="projectID"
+				@openTask="openTask"
+				:key="projectID"
+			></tasks-list>
+			<p v-else>Nie wybrano żadnego projektu! Wybierz go z menu po lewej stronie lub stwórz nowy!</p>
 		</b-col>
 	</b-row>
 </template>
@@ -22,13 +35,23 @@ export default {
 	data() {
 		return {
 			taskID: '',
+			projectID: '',
 			isTaskVisible: false
 		}
 	},
+	created() {
+		this.projectID = this.$route.query.projectID
+		this.taskID = this.$route.query.taskID
+	},
 	methods: {
 		openTask(taskID) {
-			this.taskID = taskID
 			this.isTaskVisible = true
+			this.taskID = taskID
+		},
+		openProject(projectID) {
+			this.taskID = undefined
+			this.isTaskVisible = false
+			this.projectID = projectID
 		}
 	}
 }

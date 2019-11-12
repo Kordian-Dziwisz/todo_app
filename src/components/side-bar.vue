@@ -49,7 +49,7 @@
 				v-for="(project, index) in projectsList"
 				:key="project.id"
 			>
-				<router-link :to="{name: 'user-panel', query: {projectID: project.id}}">{{project.title}}</router-link>
+				<a @click="openProject(project.id)">{{project.title}}</a>
 				<b-btn
 					@click="toggleDeleteModal(index)"
 					class="btn-sm"
@@ -124,9 +124,6 @@ export default {
 		this.getProjectsList()
 	},
 	methods: {
-		logList() {
-			console.log(this.projectsList)
-		},
 		logout() {
 			this.$router.push({ name: 'login' })
 		},
@@ -178,6 +175,13 @@ export default {
 		toggleDeleteModal(index) {
 			if (isNumber(index)) this.deleteIndex = index
 			this.isDeleteModalVisible = !this.isDeleteModalVisible
+		},
+		openProject(projectID) {
+			this.$emit('openProject', projectID)
+			this.$router.push({
+				name: 'user-panel',
+				query: { projectID: projectID }
+			})
 		}
 	}
 }

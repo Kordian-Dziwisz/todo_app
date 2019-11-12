@@ -1,13 +1,16 @@
 <template>
 	<div class="card h-75 col-7" id="my-tasks-list">
-		<task
-			v-for="(task, index) in list"
-			:key="task.id"
-			:task="task"
-			:index="index"
-			@delete="toggleDeleteModal"
-			@open="openTask"
-		></task>
+		<template v-if="list.length">
+			<task
+				v-for="(task, index) in list"
+				:key="task.id"
+				:task="task"
+				:index="index"
+				@delete="toggleDeleteModal"
+				@open="openTask"
+			></task>
+		</template>
+		<p v-else>Nie masz jeszcze żadnego zadania! Dodaj je</p>
 		<b-button @click="toggleAddModal" id="my-add-task-button" variant="primary">
 			<font-awesome-icon :icon="['fas', 'plus']" />
 		</b-button>
@@ -48,13 +51,16 @@
 	</div>
 </template>
 <script>
-	import firebase from 'firebase/app'
-	import 'firebase/firestore'
-	import Task from './task'
-	import {isNumber} from 'util'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import Task from './task'
+import { isNumber } from 'util'
 
-	export default {
+export default {
 	components: { Task },
+	props: {
+		projectID: String
+	},
 	data() {
 		return {
 			list: [],
@@ -72,7 +78,7 @@
 		this.tasks = firebase
 			.firestore()
 			.collection('projects')
-			.doc('A1X83DUed6fOPqwt1iJi')
+			.doc(this.projectID)
 			.collection('tasks')
 		this.getList()
 	},
@@ -117,6 +123,10 @@
 		},
 		openTask(taskID) {
 			this.$emit('openTask', taskID)
+			this.$router.push({
+				name: 'user-panel',
+				query: { projectID: this.projectID, taskID: taskID }
+			})
 		}
 	}
 }

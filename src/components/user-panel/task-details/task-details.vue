@@ -26,6 +26,7 @@ import SubtasksList from './subtasks-list'
 export default {
 	components: { SubtasksList },
 	props: {
+		projectID: String,
 		taskID: String
 	},
 	data() {
@@ -40,7 +41,7 @@ export default {
 		this.task = firebase
 			.firestore()
 			.collection('projects')
-			.doc('A1X83DUed6fOPqwt1iJi')
+			.doc(this.projectID)
 			.collection('tasks')
 			.doc(this.taskID)
 
