@@ -43,13 +43,22 @@
 				</ul>
 			</ul>
 			-->
-			<ul>
-				<li :v-if="projectsList.length" v-for="(project, index) in projectsList" :key="project.id">
-					<router-link :to="{name: 'user-panel', query: {projectID: project.id}}">{{project.id}}</router-link>
-					<button @click="toggleDeleteModal(index)">Delete project</button>
-					<!-- <b-button @click="logList"></b-button> -->
-				</li>
-			</ul>
+			<div
+				class="container d-flex justify-content-between"
+				:v-if="projectsList.length"
+				v-for="(project, index) in projectsList"
+				:key="project.id"
+			>
+				<router-link :to="{name: 'user-panel', query: {projectID: project.id}}">{{project.title}}</router-link>
+				<b-btn
+					@click="toggleDeleteModal(index)"
+					class="btn-sm"
+					id="my-delete-task-btn"
+					variant="danger"
+				>
+					<font-awesome-icon :icon="['fas', 'trash-alt']" />
+				</b-btn>
+			</div>
 			<div class="divider fixed-bottom" id="weird-navbar-footer"></div>
 			<div class="fixed-bottom d-flex justify-content-between" id="my-navbar-footer">
 				<b-btn variant="link" @click="toggleAddModal">
