@@ -3,20 +3,32 @@
 		<div class="row">
 			<div class="col-6">
 				<label>Nazwa:</label>
-				<p>{{taskData.title}}</p>
+				<p v-if="!isTaskEdited">{{taskData.title}}</p>
+				<b-input type="text" placeholder="Wpisz nazwę zadania" v-model="taskData.title" v-else />
 			</div>
-			<div class="col-6">
+			<div class="col-3">
 				<label>Status:</label>
-				<p>{{taskData.isCompleted}}</p>
+				<p v-if="!isTaskEdited">{{taskData.isCompleted}}</p>
+				<b-form-checkbox v-model="taskData.isCompleted" v-else>Zakończ zadanie</b-form-checkbox>
+			</div>
+			<div class="col-3">
+				<b-button-group v-if="!isTaskEdited">
+					<b-button @click="editTask()">Edytuj</b-button>
+					<b-button @click="closeTaskDetails()">Powrót</b-button>
+				</b-button-group>
+				<b-button-group v-else>
+					<b-button @click="saveTask()">Zapisz</b-button>
+					<b-button @click="isTaskEdited = false">Anuluj</b-button>
+				</b-button-group>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-12">
 				<label>Opis:</label>
-				<p>{{taskData.description}}</p>
+				<p v-if="!isTaskEdited">{{taskData.description}}</p>
+				<b-input type="text" placeholder="Wpisz opis zadania" v-model="taskData.description" v-else />
 			</div>
 		</div>
-		<!-- <subtasks-list></subtasks-list> -->
 	</div>
 </template>
 <script>
@@ -34,7 +46,8 @@ export default {
 			taskData: {},
 			editTaskData: {},
 			task: undefined,
-			isTaskEdited: false
+			isTaskEdited: false,
+			isEditing: false
 		}
 	},
 	created() {
@@ -70,6 +83,13 @@ export default {
 		},
 		uncompleteTask() {
 			this.task.update({ completed: false })
+		},
+		closeTaskDetails() {
+			this.$emit('closeTask')
+			this.$router.push({
+				name: 'user-panel',
+				query: { projectID: this.projectID }
+			})
 		}
 	}
 }

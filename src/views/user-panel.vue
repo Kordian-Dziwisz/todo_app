@@ -8,6 +8,7 @@
 				:projectID="projectID"
 				:taskID="taskID"
 				:key="taskID"
+				@closeTask="closeTask"
 			></task-details>
 			<tasks-list
 				v-else-if="projectID"
@@ -25,7 +26,6 @@
 import SideBar from '@c/side-bar'
 import TasksList from '@c/user-panel/tasks-list/tasks-list'
 import TaskDetails from '@c/user-panel/task-details/task-details'
-
 export default {
 	components: {
 		SideBar,
@@ -52,6 +52,10 @@ export default {
 			this.taskID = undefined
 			this.isTaskVisible = false
 			this.projectID = projectID
+		},
+		closeTask() {
+			this.isTaskVisible = false
+			this.taskID = undefined
 		}
 	}
 }
