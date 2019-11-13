@@ -4,12 +4,12 @@
 			<div class="col-6">
 				<label>Nazwa:</label>
 				<p v-if="!isTaskEdited">{{taskData.title}}</p>
-				<b-input type="text" placeholder="Wpisz nazwę zadania" v-model="taskData.title" v-else />
+				<b-input type="text" placeholder="Wpisz nazwę zadania" v-model="editTaskData.title" v-else />
 			</div>
 			<div class="col-3">
 				<label>Status:</label>
 				<p v-if="!isTaskEdited">{{taskData.isCompleted}}</p>
-				<b-form-checkbox v-model="taskData.isCompleted" v-else>Zakończ zadanie</b-form-checkbox>
+				<b-form-checkbox v-model="editTaskData.isCompleted" v-else>Zakończ zadanie</b-form-checkbox>
 			</div>
 			<div class="col-3">
 				<b-button-group v-if="!isTaskEdited">
@@ -26,7 +26,7 @@
 			<div class="col-12">
 				<label>Opis:</label>
 				<p v-if="!isTaskEdited">{{taskData.description}}</p>
-				<b-input type="text" placeholder="Wpisz opis zadania" v-model="taskData.description" v-else />
+				<b-input type="text" placeholder="Wpisz opis zadania" v-model="editTaskData.description" v-else />
 			</div>
 		</div>
 	</div>
