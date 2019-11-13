@@ -2,10 +2,7 @@
 	<b-container>
 		<div class="h-auto w-auto" id="my-task">
 			<div class="my-task-title">
-				<a
-					@click="open"
-					:to="{name: 'user-panel', query: {projectID: 'A1X83DUed6fOPqwt1iJi', taskID: task.id}}"
-				>
+				<a @click="open">
 					<h4>{{task.title}}</h4>
 				</a>
 				<!--				<font-awesome-icon class="fa-fw my-ellipsis-v" :icon="['fas', 'ellipsis-v']"/>-->

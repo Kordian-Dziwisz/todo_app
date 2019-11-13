@@ -32,10 +32,9 @@
 	</b-form>
 </template>
 <script>
-    import firebase from 'firebase/app'
-    import 'firebase/auth'
-
-    export default {
+import firebase from 'firebase/app'
+import 'firebase/auth'
+export default {
 	data() {
 		return {
 			email: '',
@@ -48,8 +47,7 @@
 		firebase.auth().onAuthStateChanged(user => {
 			if (user) {
 				self.$router.push({
-					name: 'user-panel',
-					query: { projectID: 'A1X83DUed6fOPqwt1iJi' }
+					name: 'user-panel'
 				})
 			}
 		})
