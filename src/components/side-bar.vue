@@ -128,9 +128,12 @@ export default {
 			this.$router.push({ name: 'login' })
 		},
 		getProjectsList() {
-			this.projects.get().then(projects => {
-				this.projectsList = projects.docs.map(this.mapProjectsList)
-			})
+			this.projects
+				.where('creatorUID', '==', firebase.auth().currentUser.uid)
+				.get()
+				.then(projects => {
+					this.projectsList = projects.docs.map(this.mapProjectsList)
+				})
 		},
 		mapProjectsList(project) {
 			return {
