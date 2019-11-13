@@ -1,23 +1,23 @@
 <template>
 	<b-col class="m-0 bg-light" lg="2" md="2" sm="2">
 		<b-nav class="vh-100" id="my-navbar" vertical>
-			<b-navbar-brand href="/user-panel">todo_app</b-navbar-brand>
+			<b-navbar-brand @click="openFilter">todo_app</b-navbar-brand>
 			<b-navbar-nav>
-				<b-nav-item href="/user-panel">
+				<a @click="openFilter">
 					<font-awesome-icon :icon="['fas', 'user']" class="fa-fw a-secondary" />Panel użytkownika
-				</b-nav-item>
-				<b-nav-item href="/user-panel">
+				</a>
+				<a @click="openFilter">
 					<font-awesome-icon :icon="['fas', 'star']" class="fa-fw" />Dzisiaj
-				</b-nav-item>
-				<b-nav-item href="/user-panel">
+				</a>
+				<a @click="openFilter">
 					<font-awesome-icon :icon="['fas', 'calendar-alt']" class="fa-fw" />Nadchodzące
-				</b-nav-item>
-				<b-nav-item href="/user-panel">
+				</a>
+				<a @click="openFilter">
 					<font-awesome-icon :icon="['fas', 'layer-group']" class="fa-fw" />Kiedyś
-				</b-nav-item>
-				<b-nav-item href="/user-panel">
+				</a>
+				<a @click="openFilter">
 					<font-awesome-icon :icon="['fas', 'archive']" class="fa-fw" />Wszystkie zadania
-				</b-nav-item>
+				</a>
 			</b-navbar-nav>
 			<div class="divider"></div>
 			<!-- <ul class="navbar-nav">
@@ -185,6 +185,10 @@ export default {
 				name: 'user-panel',
 				query: { projectID: projectID }
 			})
+		},
+		openFilter(filter) {
+			this.$emit('openFilter')
+			this.$router.push({ name: 'user-panel' })
 		}
 	}
 }

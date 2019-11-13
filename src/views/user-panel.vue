@@ -1,6 +1,6 @@
 <template>
 	<b-row class="vh-100">
-		<side-bar @openProject="openProject"></side-bar>
+		<side-bar @openProject="openProject" @openFilter="openFilter"></side-bar>
 		<b-col class="d-flex flex-row justify-content-around vh-100" lg="10" md="10" sm="10">
 			<task-details
 				v-if="taskID"
@@ -55,6 +55,11 @@ export default {
 		},
 		closeTask() {
 			this.isTaskVisible = false
+			this.taskID = undefined
+		},
+		openFilter() {
+			this.isTaskVisible = false
+			this.projectID = undefined
 			this.taskID = undefined
 		}
 	}
