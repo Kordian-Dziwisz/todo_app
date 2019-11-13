@@ -3,21 +3,21 @@
 		<b-nav class="vh-100" id="my-navbar" vertical>
 			<b-navbar-brand @click="openFilter">todo_app</b-navbar-brand>
 			<b-navbar-nav>
-				<a @click="openFilter">
+				<b-nav-item @click="openFilter">
 					<font-awesome-icon :icon="['fas', 'user']" class="fa-fw a-secondary" />Panel użytkownika
-				</a>
-				<a @click="openFilter">
+				</b-nav-item>
+				<b-nav-item @click="openFilter">
 					<font-awesome-icon :icon="['fas', 'star']" class="fa-fw" />Dzisiaj
-				</a>
-				<a @click="openFilter">
+				</b-nav-item>
+				<b-nav-item @click="openFilter">
 					<font-awesome-icon :icon="['fas', 'calendar-alt']" class="fa-fw" />Nadchodzące
-				</a>
-				<a @click="openFilter">
+				</b-nav-item>
+				<b-nav-item @click="openFilter">
 					<font-awesome-icon :icon="['fas', 'layer-group']" class="fa-fw" />Kiedyś
-				</a>
-				<a @click="openFilter">
+				</b-nav-item>
+				<b-nav-item @click="openFilter">
 					<font-awesome-icon :icon="['fas', 'archive']" class="fa-fw" />Wszystkie zadania
-				</a>
+				</b-nav-item>
 			</b-navbar-nav>
 			<div class="divider"></div>
 			<!-- <ul class="navbar-nav">
