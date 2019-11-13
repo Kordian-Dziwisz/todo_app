@@ -1,7 +1,7 @@
 <template>
 	<b-form @submit.prevent="register" class="container w-50">
 		<h3>Wypełnij formularz, aby się zarejestrować</h3>
-		<b-form-control>
+		<b-form-group>
 			<label for="name">Imię:</label>
 			<b-input
 				type="text"
@@ -11,8 +11,8 @@
 				v-model="name"
 				required
 			></b-input>
-		</b-form-control>
-		<b-form-control>
+		</b-form-group>
+		<b-form-group>
 			<label for="email">Email:</label>
 			<b-input
 				type="email"
@@ -22,8 +22,8 @@
 				v-model="email"
 				required
 			></b-input>
-		</b-form-control>
-		<b-form-control>
+		</b-form-group>
+		<b-form-group>
 			<label for="password">Hasło:</label>
 			<b-input
 				type="password"
@@ -33,8 +33,8 @@
 				v-model="password"
 				required
 			></b-input>
-		</b-form-control>
-		<b-form-control>
+		</b-form-group>
+		<b-form-group>
 			<label for="password">Powtórz hasło:</label>
 			<b-input
 				type="password"
@@ -44,17 +44,16 @@
 				v-model="passwordConfirm"
 				required
 			></b-input>
-		</b-form-control>
-		<br>
+		</b-form-group>
 		<b-button type="submit" variant="primary">Wyślij</b-button>
 	</b-form>
 </template>
 <script>
-    import firebase from 'firebase/app'
-    import 'firebase/auth'
-    import 'firebase/firestore'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
 
-    export default {
+export default {
 	data() {
 		return {
 			email: '',
