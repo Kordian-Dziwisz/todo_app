@@ -1,5 +1,5 @@
 <template>
-	<div class="card h-75 col-7" id="my-tasks-list">
+	<div class="card h-100 w-100 m-0 col-10" id="my-tasks-list">
 		<template v-if="list.length">
 			<task
 				v-for="(task, index) in list"
@@ -10,13 +10,13 @@
 				@open="openTask"
 			></task>
 		</template>
-		<p v-else>Nie masz jeszcze żadnego zadania! Dodaj je</p>
+		<p v-else>Nie masz jeszcze żadnego zadania! Dodaj je.</p>
 		<b-button @click="toggleAddModal" id="my-add-task-button" variant="primary">
 			<font-awesome-icon :icon="['fas', 'plus']" />
 		</b-button>
 
 		<b-modal title="Usuwanie zadania" v-model="isDeleteModalVisible" :lazy="true">
-			<p>Czy chcesz usunąć to zadanie?</p>
+			<p>Czy na pewno chcesz usunąć to zadanie?</p>
 			<div slot="modal-footer" class="w-100">
 				<b-button class="float-right ml-1" variant="outline-primary" @click="deleteTask">Usuń</b-button>
 				<b-button
@@ -35,12 +35,12 @@
 				</b-form-group>
 				<b-form-group>
 					<label for="descriptionInput">Opis:</label>
-					<b-form-input
+					<b-form-textarea
 						id="descriptionInput"
 						type="text"
 						v-model="newTask.description"
 						placeholder="Opis zadania"
-					></b-form-input>
+					></b-form-textarea>
 				</b-form-group>
 			</b-form>
 			<div slot="modal-footer" class="w-100">
@@ -51,12 +51,12 @@
 	</div>
 </template>
 <script>
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import Task from './task'
-import { isNumber } from 'util'
+	import firebase from 'firebase/app'
+	import 'firebase/firestore'
+	import Task from './task'
+	import {isNumber} from 'util'
 
-export default {
+	export default {
 	components: { Task },
 	props: {
 		projectID: String

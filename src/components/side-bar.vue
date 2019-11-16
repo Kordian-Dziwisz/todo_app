@@ -4,7 +4,7 @@
 			<b-navbar-brand @click="openFilter">todo_app</b-navbar-brand>
 			<b-navbar-nav>
 				<b-nav-item @click="openFilter">
-					<font-awesome-icon :icon="['fas', 'user']" class="fa-fw a-secondary" />Panel użytkownika
+					<font-awesome-icon :icon="['fas', 'user']" class="fa-fw a-secondary" secondary/>Panel użytkownika
 				</b-nav-item>
 				<b-nav-item @click="openFilter">
 					<font-awesome-icon :icon="['fas', 'star']" class="fa-fw" />Dzisiaj
@@ -19,32 +19,9 @@
 					<font-awesome-icon :icon="['fas', 'archive']" class="fa-fw" />Wszystkie zadania
 				</b-nav-item>
 			</b-navbar-nav>
-			<div class="divider"></div>
-			<!-- <ul class="navbar-nav">
-				<li class="navbar-brand">
-					<a class="nav-link" href="/user-panel">
-						<h3>Zadanie1</h3>
-					</a>
-				</li>
-				<ul class="navbar-nav">
-					<a href="/user-panel" class="nav-link">Podzadanie1</a>
-					<a href="/user-panel" class="nav-link">Podzadanie2</a>
-				</ul>
-			</ul>
-			<ul class="navbar-nav">
-				<li class="navbar-brand">
-					<a class="nav-link" href="/user-panel">
-						<h3>Zadanie2</h3>
-					</a>
-				</li>
-				<ul class="navbar-nav">
-					<a href="/user-panel" class="nav-link">Podzadanie1</a>
-					<a href="/user-panel" class="nav-link">Podzadanie2</a>
-				</ul>
-			</ul>
-			-->
+			<hr>
 			<div
-				class="container d-flex justify-content-between"
+				class="my-projects container d-flex justify-content-between"
 				:v-if="projectsList.length"
 				v-for="(project, index) in projectsList"
 				:key="project.id"
@@ -59,7 +36,7 @@
 					<font-awesome-icon :icon="['fas', 'trash-alt']" />
 				</b-btn>
 			</div>
-			<div class="divider fixed-bottom" id="weird-navbar-footer"></div>
+			<div class="w-100 fixed-bottom" id="weird-navbar-footer"></div>
 			<div class="fixed-bottom d-flex justify-content-between" id="my-navbar-footer">
 				<b-btn variant="link" @click="toggleAddModal">
 					<font-awesome-icon :icon="['fas', 'plus']" />
@@ -101,12 +78,12 @@
 	</b-col>
 </template>
 <script>
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firestore'
-import { isNumber } from 'util'
+	import firebase from 'firebase/app'
+	import 'firebase/auth'
+	import 'firebase/firestore'
+	import {isNumber} from 'util'
 
-export default {
+	export default {
 	data() {
 		return {
 			projectsList: [],
@@ -194,29 +171,57 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-#my-navbar-footer {
-	text-align: right;
-	width: 100%;
-	position: absolute;
-}
-#my-navbar {
-	display: block;
-}
-#weird-navbar-footer {
-	position: absolute;
-	margin-right: 100px;
-	border: 1px solid rgba(144, 144, 145, 0.3);
-	margin-bottom: 40px;
-}
-.divider {
-	width: 100%;
-	border: 2px solid grey;
-	border-radius: 7px;
-	margin-top: 30px;
-	margin-bottom: 30px;
-}
-#my-cog:hover {
-	-webkit-animation: rotating 2s linear infinite;
+@import '~bootstrap/scss/bootstrap';
+
+.col-md-2 {
+	#my-navbar {
+		display: block;
+	}
+	.nav {
+		.navbar-nav {
+			.nav-link {
+				color: $gray-600;
+			}
+			.nav-link:hover {
+				color: $gray-700;
+			}
+		}
+		hr {
+			width: 100%;
+			border: 2px solid grey;
+			border-radius: 7px;
+			margin-top: 30px;
+			margin-bottom: 30px;
+		}
+		.my-projects {
+			margin-bottom: 5px;
+			cursor: pointer;
+		}
+		#my-navbar-footer {
+			text-align: right;
+			width: 100%;
+			position: absolute;
+
+			.btn {
+				color: $gray-600;
+
+			}
+			.btn:hover {
+				color: $gray-700;
+			}
+			.btn-group {
+				#my-cog:hover {
+					-webkit-animation: rotating 2s linear infinite;
+				}
+			}
+		}
+		#weird-navbar-footer {
+			position: absolute;
+			margin-right: 100px;
+			border: 1px solid rgba(144, 144, 145, 0.3);
+			margin-bottom: 40px;
+		}
+	}
 }
 @keyframes rotating {
 	from {

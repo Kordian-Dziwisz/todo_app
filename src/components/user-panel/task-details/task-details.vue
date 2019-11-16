@@ -1,41 +1,42 @@
 <template>
-	<div class="card h-75 col-7" id="margin-top">
+	<div class="card h-75 col-10" id="margin-top">
 		<div class="row">
 			<div class="col-6">
-				<label>Nazwa:</label>
+				<label><h4>Nazwa:</h4></label>
 				<p v-if="!isTaskEdited">{{taskData.title}}</p>
 				<b-input type="text" placeholder="Wpisz nazwę zadania" v-model="editTaskData.title" v-else />
 			</div>
 			<div class="col-3">
-				<label>Status:</label>
+				<label><h4>Status:</h4></label>
 				<p v-if="!isTaskEdited">{{taskData.isCompleted}}</p>
 				<b-form-checkbox v-model="editTaskData.isCompleted" v-else>Zakończ zadanie</b-form-checkbox>
 			</div>
-			<div class="col-3">
-				<b-button-group v-if="!isTaskEdited">
-					<b-button @click="editTask()">Edytuj</b-button>
-					<b-button @click="closeTaskDetails()">Powrót</b-button>
-				</b-button-group>
-				<b-button-group v-else>
-					<b-button @click="saveTask()">Zapisz</b-button>
-					<b-button @click="isTaskEdited = false">Anuluj</b-button>
-				</b-button-group>
-			</div>
 		</div>
 		<div class="row">
-			<div class="col-12">
+			<div class="col-9">
 				<label>Opis:</label>
 				<p v-if="!isTaskEdited">{{taskData.description}}</p>
-				<b-input type="text" placeholder="Wpisz opis zadania" v-model="editTaskData.description" v-else />
+				<b-textarea rows="10" type="text" placeholder="Wpisz opis zadania" v-model="editTaskData.description" v-else />
 			</div>
+		</div>
+		<div id="my-btns-for-edit">
+			<b-button-group v-if="!isTaskEdited">
+				<b-button @click="editTask()">Edytuj</b-button>
+				<b-button @click="closeTaskDetails()">Powrót</b-button>
+			</b-button-group>
+			<b-button-group v-else>
+				<b-button @click="saveTask()">Zapisz</b-button>
+				<b-button @click="isTaskEdited = false">Anuluj</b-button>
+			</b-button-group>
 		</div>
 	</div>
 </template>
 <script>
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import SubtasksList from './subtasks-list'
-export default {
+	import firebase from 'firebase/app'
+	import 'firebase/firestore'
+	import SubtasksList from './subtasks-list'
+
+	export default {
 	components: { SubtasksList },
 	props: {
 		projectID: String,
@@ -94,10 +95,19 @@ export default {
 	}
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
 #margin-top {
-	margin-top: 50px;
+	mergin-top: 25% !important;
 	display: flex;
 	overflow-y: scroll;
+
+	#my-btns-for-edit {
+		display: flex;
+		align-content: left;
+		justify-content: flex-end;
+		position: fixed;
+		top: 70vh;
+		left: 79%;
+	}
 }
 </style>
