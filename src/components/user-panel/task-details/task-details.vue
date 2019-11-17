@@ -24,9 +24,11 @@
 				<b-button @click="closeTaskDetails()"><font-awesome-icon :icon="['fas', 'arrow-left']" class="fa-fw"/></b-button>
 				<b-button @click="editTask()"><font-awesome-icon :icon="['fas', 'edit']" class="fa-fw"/></b-button>
 			</b-container>
-			<b-container fluid v-else class="my-btn-containers justify-content-between align-items-end">
-				<b-button @click="saveTask()"><font-awesome-icon :icon="['fas', 'save']" class="fa-fw"/></b-button>
-				<b-button @click="isTaskEdited = false"><font-awesome-icon :icon="['fas', 'times']" class="fa-fw"/></b-button>
+			<b-container fluid v-else class="my-btn-containers justify-content-end align-items-end">
+				<b-button-group>
+					<b-button @click="saveTask()"><font-awesome-icon :icon="['fas', 'save']" class="fa-fw"/></b-button>
+					<b-button @click="isTaskEdited = false"><font-awesome-icon :icon="['fas', 'times']" class="fa-fw"/></b-button>
+				</b-button-group>
 			</b-container>
 		</b-container>
 	</div>
