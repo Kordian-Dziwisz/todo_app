@@ -19,24 +19,24 @@
 				<b-textarea rows="10" type="text" placeholder="Wpisz opis zadania" v-model="editTaskData.description" v-else />
 			</div>
 		</div>
-		<div id="my-btns-for-edit">
-			<b-button-group v-if="!isTaskEdited">
-				<b-button @click="editTask()">Edytuj</b-button>
-				<b-button @click="closeTaskDetails()">Powrót</b-button>
-			</b-button-group>
-			<b-button-group v-else>
-				<b-button @click="saveTask()">Zapisz</b-button>
-				<b-button @click="isTaskEdited = false">Anuluj</b-button>
-			</b-button-group>
-		</div>
+		<b-container fluid id="my-btns-for-edit">
+			<b-container fluid v-if="!isTaskEdited" class="my-btn-containers justify-content-between align-items-end">
+				<b-button @click="closeTaskDetails()"><font-awesome-icon :icon="['fas', 'arrow-left']" class="fa-fw"/></b-button>
+				<b-button @click="editTask()"><font-awesome-icon :icon="['fas', 'edit']" class="fa-fw"/></b-button>
+			</b-container>
+			<b-container fluid v-else class="my-btn-containers justify-content-between align-items-end">
+				<b-button @click="saveTask()"><font-awesome-icon :icon="['fas', 'save']" class="fa-fw"/></b-button>
+				<b-button @click="isTaskEdited = false"><font-awesome-icon :icon="['fas', 'times']" class="fa-fw"/></b-button>
+			</b-container>
+		</b-container>
 	</div>
 </template>
 <script>
-	import firebase from 'firebase/app'
-	import 'firebase/firestore'
-	import SubtasksList from './subtasks-list'
+    import firebase from 'firebase/app'
+    import 'firebase/firestore'
+    import SubtasksList from './subtasks-list'
 
-	export default {
+    export default {
 	components: { SubtasksList },
 	props: {
 		projectID: String,
@@ -103,11 +103,12 @@
 
 	#my-btns-for-edit {
 		display: flex;
-		align-content: left;
-		justify-content: flex-end;
-		position: fixed;
-		top: 70vh;
-		left: 79%;
+		height: 100%;
+		padding: 10px;
+		margin: 0;
+		.my-btn-containers {
+			display: flex;
+		}
 	}
 }
 </style>
