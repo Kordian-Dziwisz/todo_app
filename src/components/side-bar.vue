@@ -121,7 +121,11 @@ export default {
 	},
 	created() {
 		this.projects = firebase.firestore().collection('projects')
-		this.getProjectsList()
+		firebase.auth().onAuthStateChanged(user => {
+			if (user) {
+				this.getProjectsList()
+			}
+		})
 	},
 	methods: {
 		logout() {

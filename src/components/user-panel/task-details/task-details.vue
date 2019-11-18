@@ -26,7 +26,12 @@
 			<div class="col-12">
 				<label>Opis:</label>
 				<p v-if="!isTaskEdited">{{taskData.description}}</p>
-				<b-input type="text" placeholder="Wpisz opis zadania" v-model="editTaskData.description" v-else />
+				<b-input
+					type="text"
+					placeholder="Wpisz opis zadania"
+					v-model="editTaskData.description"
+					v-else
+				/>
 			</div>
 		</div>
 	</div>
@@ -35,6 +40,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import SubtasksList from './subtasks-list'
+
 export default {
 	components: { SubtasksList },
 	props: {
