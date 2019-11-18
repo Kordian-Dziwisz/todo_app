@@ -1,39 +1,64 @@
 <template>
-	<div class="card h-75 col-7" id="margin-top">
+	<div class="card h-75 col-10" id="margin-top">
 		<div class="row">
 			<div class="col-6">
-				<label>Nazwa:</label>
+				<label>
+					<h4>Nazwa:</h4>
+				</label>
 				<p v-if="!isTaskEdited">{{taskData.title}}</p>
 				<b-input type="text" placeholder="Wpisz nazwę zadania" v-model="editTaskData.title" v-else />
 			</div>
 			<div class="col-3">
-				<label>Status:</label>
+				<label>
+					<h4>Status:</h4>
+				</label>
 				<p v-if="!isTaskEdited">{{taskData.isCompleted}}</p>
 				<b-form-checkbox v-model="editTaskData.isCompleted" v-else>Zakończ zadanie</b-form-checkbox>
 			</div>
-			<div class="col-3">
-				<b-button-group v-if="!isTaskEdited">
-					<b-button @click="editTask()">Edytuj</b-button>
-					<b-button @click="closeTaskDetails()">Powrót</b-button>
-				</b-button-group>
-				<b-button-group v-else>
-					<b-button @click="saveTask()">Zapisz</b-button>
-					<b-button @click="isTaskEdited = false">Anuluj</b-button>
-				</b-button-group>
-			</div>
 		</div>
 		<div class="row">
-			<div class="col-12">
+			<div class="col-9">
 				<label>Opis:</label>
-				<p v-if="!isTaskEdited">{{taskData.description}}</p>
+				<p v-if="!isTaskEdited">{{taskData.description}}</p><<<<<<< HEAD
 				<b-input
 					type="text"
 					placeholder="Wpisz opis zadania"
 					v-model="editTaskData.description"
 					v-else
-				/>
+				/>=======
+				<b-textarea
+					rows="10"
+					type="text"
+					placeholder="Wpisz opis zadania"
+					v-model="editTaskData.description"
+					v-else
+				/>>>>>>>> 5920a7079e2278573f19413990daa1e0eb7317bd
 			</div>
 		</div>
+		<b-container fluid id="my-btns-for-edit">
+			<b-container
+				fluid
+				v-if="!isTaskEdited"
+				class="my-btn-containers justify-content-between align-items-end"
+			>
+				<b-button @click="closeTaskDetails()">
+					<font-awesome-icon :icon="['fas', 'arrow-left']" class="fa-fw" />
+				</b-button>
+				<b-button @click="editTask()">
+					<font-awesome-icon :icon="['fas', 'edit']" class="fa-fw" />
+				</b-button>
+			</b-container>
+			<b-container fluid v-else class="my-btn-containers justify-content-end align-items-end">
+				<b-button-group>
+					<b-button @click="saveTask()">
+						<font-awesome-icon :icon="['fas', 'save']" class="fa-fw" />
+					</b-button>
+					<b-button @click="isTaskEdited = false">
+						<font-awesome-icon :icon="['fas', 'times']" class="fa-fw" />
+					</b-button>
+				</b-button-group>
+			</b-container>
+		</b-container>
 	</div>
 </template>
 <script>
@@ -100,10 +125,20 @@ export default {
 	}
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
 #margin-top {
-	margin-top: 50px;
+	mergin-top: 25% !important;
 	display: flex;
 	overflow-y: scroll;
+
+	#my-btns-for-edit {
+		display: flex;
+		height: 100%;
+		padding: 10px;
+		margin: 0;
+		.my-btn-containers {
+			display: flex;
+		}
+	}
 }
 </style>

@@ -14,13 +14,17 @@ import 'bootstrap/dist/css/bootstrap.css'
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {
 	faArchive,
+	faArrowLeft,
 	faCalendarAlt,
 	faCog,
 	faDoorOpen,
+	faEdit,
 	faEllipsisV,
 	faLayerGroup,
 	faPlus,
+	faSave,
 	faStar,
+	faTimes,
 	faTrashAlt,
 	faUser
 } from '@fortawesome/free-solid-svg-icons'
@@ -39,7 +43,11 @@ library.add(
 	faPlus,
 	faEllipsisV,
 	faTrashAlt,
-	faDoorOpen
+	faDoorOpen,
+	faSave,
+	faTimes,
+	faArrowLeft,
+	faEdit
 )
 //component for fontawesome
 Vue.component('font-awesome-icon', FontAwesomeIcon)
