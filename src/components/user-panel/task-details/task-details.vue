@@ -19,20 +19,14 @@
 		<div class="row">
 			<div class="col-9">
 				<label>Opis:</label>
-				<p v-if="!isTaskEdited">{{taskData.description}}</p><<<<<<< HEAD
-				<b-input
-					type="text"
-					placeholder="Wpisz opis zadania"
-					v-model="editTaskData.description"
-					v-else
-				/>=======
+				<p v-if="!isTaskEdited">{{taskData.description}}</p>
 				<b-textarea
 					rows="10"
 					type="text"
 					placeholder="Wpisz opis zadania"
 					v-model="editTaskData.description"
 					v-else
-				/>>>>>>>> 5920a7079e2278573f19413990daa1e0eb7317bd
+				/>
 			</div>
 		</div>
 		<b-container fluid id="my-btns-for-edit">
