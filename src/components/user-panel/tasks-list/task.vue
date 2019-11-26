@@ -8,7 +8,7 @@
 				<!--				<font-awesome-icon class="fa-fw my-ellipsis-v" :icon="['fas', 'ellipsis-v']"/>-->
 			</div>
 			<h6 class="disabled">Opis:</h6>
-			<p class>{{task.isCompleted}} : {{task.description}}</p>
+			<p class>{{task.description}}</p>
 			<div class="my-div-to-left">
 				<b-btn @click="deleteTask" class="btn-sm" id="my-delete-task-btn" variant="danger">
 					<font-awesome-icon :icon="['fas', 'trash-alt']" />
