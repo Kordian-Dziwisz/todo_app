@@ -2,7 +2,8 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /projects/{projectID} {
-    	allow read, write: if request.auth.uid == resource.data.creatorUID;
+		allow create: if request.auth.uid != null;
+    	allow get, list, write: if request.auth.uid == resource.data.creatorUID;
       match /tasks/{taskID} {
       	allow read, delete: if request.auth.uid == get(/databases/$(database)/documents/projects/$(projectID)).data.creatorUID;
       	allow update, create: if request.auth.uid == get(/databases/$(database)/documents/projects/$(projectID)).data.creatorUID && request.resource.data.title.size() > 0;

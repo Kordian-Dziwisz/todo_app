@@ -4,7 +4,7 @@
 			<b-navbar-brand @click="openFilter">todo_app</b-navbar-brand>
 			<b-navbar-nav>
 				<b-nav-item @click="openFilter">
-					<font-awesome-icon :icon="['fas', 'user']" class="fa-fw a-secondary" secondary/>Panel użytkownika
+					<font-awesome-icon :icon="['fas', 'user']" class="fa-fw a-secondary" secondary />Panel użytkownika
 				</b-nav-item>
 				<b-nav-item @click="openFilter">
 					<font-awesome-icon :icon="['fas', 'star']" class="fa-fw" />Dzisiaj
@@ -19,7 +19,7 @@
 					<font-awesome-icon :icon="['fas', 'archive']" class="fa-fw" />Wszystkie zadania
 				</b-nav-item>
 			</b-navbar-nav>
-			<hr>
+			<hr />
 			<div
 				class="my-projects container d-flex justify-content-between"
 				:v-if="projectsList.length"
@@ -78,12 +78,12 @@
 	</b-col>
 </template>
 <script>
-	import firebase from 'firebase/app'
-	import 'firebase/auth'
-	import 'firebase/firestore'
-	import {isNumber} from 'util'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
+import { isNumber } from 'util'
 
-	export default {
+export default {
 	data() {
 		return {
 			projectsList: [],
@@ -131,8 +131,6 @@
 					})
 					.then(this.addProjectToList)
 					.catch(console.log)
-				this.addProjectToList()
-				this.toggleAddModal()
 			}
 		},
 		addProjectToList(project) {
@@ -141,6 +139,8 @@
 				id: project.id,
 				creatorUID: firebase.auth().currentUser.uid
 			})
+			this.toggleAddModal()
+			this.openProject(project.id)
 		},
 		toggleAddModal() {
 			this.isAddModalVisible = !this.isAddModalVisible
@@ -208,7 +208,6 @@
 
 			.btn {
 				color: $gray-600;
-
 			}
 			.btn:hover {
 				color: $gray-700;
