@@ -140,7 +140,7 @@ export default {
 </script>
 <style scoped lang="scss">
 #margin-top {
-	mergin-top: 25% !important;
+	margin-top: 25% !important;
 	display: flex;
 	overflow-y: scroll;
 
