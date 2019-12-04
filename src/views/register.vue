@@ -45,7 +45,7 @@
 				required
 			></b-input>
 		</b-form-group>
-		<b-button type="submit" variant="primary">Wyślij</b-button>
+		<b-button type="submit" variant="primary" v-b-tooltip.hover.v-danger="error">Wyślij</b-button>
 	</b-form>
 </template>
 <script>
@@ -59,7 +59,8 @@ export default {
 			email: '',
 			password: '',
 			passwordConfirm: '',
-			name: ''
+			name: '',
+			error: ''
 		}
 	},
 	created() {
@@ -98,9 +99,19 @@ export default {
 				firebase
 					.auth()
 					.createUserWithEmailAndPassword(this.email, this.password)
-					.catch(console.log)
+					.catch(this.setError)
 			} else {
 				console.log("form isn't completed")
+			}
+		},
+		setError(err) {
+			switch (err.code) {
+				case 'auth/email-already-in-use':
+					this.error = 'adres email jest już w użyciu'
+					break
+				default:
+					this.error = 'wystąpił nieznany błąd'
+					break
 			}
 		}
 	}
