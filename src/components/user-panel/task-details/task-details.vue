@@ -88,9 +88,12 @@ export default {
 	methods: {
 		getTaskData() {
 			const self = this
-			this.task.get().then(task => {
-				self.taskData = task.data()
-			})
+			this.task
+				.get()
+				.then(task => {
+					self.taskData = task.data()
+				})
+				.catch(this.emitError)
 		},
 		editTask() {
 			this.editTaskData = { ...this.taskData }
@@ -115,6 +118,22 @@ export default {
 				name: 'user-panel',
 				query: { projectID: this.projectID }
 			})
+		},
+		/**
+		 * emit firebase error message
+		 * @param {string} err firebase error code
+		 * @emits string#error output error message
+		 */
+		emitError(err) {
+			var msg
+			switch (err.code) {
+				case 'permission-denied':
+					msg = 'niewystarczające uprawnienia'
+					break
+				default:
+					msg = 'wystąpił nieznany błąd'
+			}
+			this.$emit('error', msg)
 		}
 	}
 }

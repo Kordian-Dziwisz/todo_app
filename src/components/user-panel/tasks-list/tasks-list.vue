@@ -51,12 +51,12 @@
 	</div>
 </template>
 <script>
-	import firebase from 'firebase/app'
-	import 'firebase/firestore'
-	import Task from './task'
-	import {isNumber} from 'util'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import Task from './task'
+import { isNumber } from 'util'
 
-	export default {
+export default {
 	components: { Task },
 	props: {
 		projectID: String
@@ -84,9 +84,12 @@
 	},
 	methods: {
 		getList() {
-			this.tasks.get().then(collection => {
-				this.list = collection.docs.map(this.mapList)
-			})
+			this.tasks
+				.get()
+				.then(collection => {
+					this.list = collection.docs.map(this.mapList)
+				})
+				.catch(this.emitError)
 		},
 		mapList(task) {
 			return { ...task.data(), id: task.id }
@@ -96,7 +99,7 @@
 				this.tasks
 					.add({ ...this.newTask, isCompleted: false })
 					.then(this.addTaskToList)
-					.catch(console.log),
+					.catch(this.emitError),
 					this.toggleAddModal()
 			}
 		},
@@ -107,7 +110,7 @@
 			this.tasks
 				.doc(this.list[this.deleteIndex].id)
 				.delete()
-				.catch(console.log())
+				.catch(this.emitError)
 			this.deleteTaskInLIst()
 			this.toggleDeleteModal()
 		},
@@ -127,6 +130,22 @@
 				name: 'user-panel',
 				query: { projectID: this.projectID, taskID: taskID }
 			})
+		},
+		/**
+		 * emit firebase error message
+		 * @param {string} err firebase error code
+		 * @emits string#error output error message
+		 */
+		emitError(err) {
+			var msg
+			switch (err.code) {
+				case 'permission-denied':
+					msg = 'niewystarczające uprawnienia'
+					break
+				default:
+					msg = 'wystąpił nieznany błąd'
+			}
+			this.$emit('error', msg)
 		}
 	}
 }

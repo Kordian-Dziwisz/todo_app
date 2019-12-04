@@ -2,6 +2,7 @@
 	<b-row class="vh-100">
 		<side-bar @openProject="openProject" @openFilter="openFilter"></side-bar>
 		<b-col class="d-flex flex-row justify-content-around vh-100" lg="10" md="10" sm="10">
+			<error-alert v-if="error.length" :error="error" :key="error"></error-alert>
 			<task-details
 				v-if="taskID"
 				v-show="isTaskVisible"
@@ -9,12 +10,14 @@
 				:taskID="taskID"
 				:key="taskID"
 				@closeTask="closeTask"
+				@error="showError"
 			></task-details>
 			<tasks-list
 				v-else-if="projectID"
 				v-show="!isTaskVisible"
 				:projectID="projectID"
 				@openTask="openTask"
+				@error="showError"
 				:key="projectID"
 			></tasks-list>
 			<p v-else>Nie wybrano żadnego projektu! Wybierz go z menu po lewej stronie lub stwórz nowy!</p>
@@ -26,17 +29,20 @@
 import SideBar from '@c/side-bar'
 import TasksList from '@c/user-panel/tasks-list/tasks-list'
 import TaskDetails from '@c/user-panel/task-details/task-details'
+import ErrorAlert from '@c/user-panel/error-alert.vue'
 export default {
 	components: {
 		SideBar,
 		TasksList,
-		TaskDetails
+		TaskDetails,
+		ErrorAlert
 	},
 	data() {
 		return {
 			taskID: '',
 			projectID: '',
-			isTaskVisible: false
+			isTaskVisible: false,
+			error: ''
 		}
 	},
 	created() {
@@ -61,6 +67,12 @@ export default {
 			this.isTaskVisible = false
 			this.projectID = undefined
 			this.taskID = undefined
+		},
+		/**
+		 * @param {string} err error message
+		 */
+		showError(err) {
+			this.error = err
 		}
 	}
 }
