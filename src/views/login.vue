@@ -1,5 +1,5 @@
 <template>
-	<b-form @submit.prevent="login" class="container w-50">
+	<b-form @submit.prevent="signIn" class="container w-50">
 		<b-form-group>
 			<p>Zaloguj się do serwisu</p>
 			<label for="email">Email:</label>
@@ -8,7 +8,7 @@
 				type="email"
 				id="email"
 				placeholder="Wpisz email"
-				v-model="email"
+				v-model="user.email"
 				required
 			></b-input>
 		</b-form-group>
@@ -19,7 +19,7 @@
 				type="password"
 				id="password"
 				placeholder="Wpisz hasło"
-				v-model="password"
+				v-model="user.password"
 				required
 			></b-input>
 		</b-form-group>
@@ -32,33 +32,12 @@
 	</b-form>
 </template>
 <script>
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import Auth from '@/mixins/auth'
 export default {
-	data() {
-		return {
-			email: '',
-			password: ''
-		}
-	},
+	mixins: [Auth],
 	created() {
-		const self = this
-		firebase.auth().signOut()
-		firebase.auth().onAuthStateChanged(user => {
-			if (user) {
-				self.$router.push({
-					name: 'user-panel'
-				})
-			}
-		})
-	},
-	methods: {
-		login() {
-			firebase
-				.auth()
-				.signInWithEmailAndPassword(this.email, this.password)
-				.catch(console.log)
-		}
+		this.signOut()
+		this.enableRedirectOnAuth()
 	}
 }
 </script>

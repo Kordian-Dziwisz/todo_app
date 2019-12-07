@@ -1,5 +1,5 @@
 <template>
-	<b-form @submit.prevent="register" class="container w-50">
+	<b-form @submit.prevent="signUp" class="container w-50">
 		<h3>Wypełnij formularz, aby się zarejestrować</h3>
 		<b-form-group>
 			<label for="name">Imię:</label>
@@ -8,7 +8,7 @@
 				class="form-control"
 				placeholder="Wpisz imię"
 				id="name"
-				v-model="name"
+				v-model="user.name"
 				required
 			></b-input>
 		</b-form-group>
@@ -19,7 +19,7 @@
 				class="form-control"
 				placeholder="Wpisz email"
 				id="email"
-				v-model="email"
+				v-model="user.email"
 				required
 			></b-input>
 		</b-form-group>
@@ -30,7 +30,7 @@
 				class="form-control"
 				placeholder="Wpisz hasło:"
 				id="password"
-				v-model="password"
+				v-model="user.password"
 				required
 			></b-input>
 		</b-form-group>
@@ -41,79 +41,20 @@
 				class="form-control"
 				placeholder="Powtórz hasło:"
 				id="password-confirm"
-				v-model="passwordConfirm"
+				v-model="user.passwordConfirm"
 				required
 			></b-input>
 		</b-form-group>
-		<b-button type="submit" variant="primary" v-b-tooltip.hover.v-danger="error">Wyślij</b-button>
+		<b-button type="submit" variant="primary" v-b-tooltip.hover.v-danger="error.message">Wyślij</b-button>
 	</b-form>
 </template>
 <script>
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firestore'
-
+import Auth from '@/mixins/auth'
 export default {
-	data() {
-		return {
-			email: '',
-			password: '',
-			passwordConfirm: '',
-			name: '',
-			error: ''
-		}
-	},
+	mixins: [Auth],
 	created() {
-		const self = this
-		firebase.auth().signOut()
-		firebase.auth().onAuthStateChanged(user => {
-			if (user) {
-				self.addUserToFirestore(user)
-				this.$router.push({
-					name: 'user-panel'
-				})
-			}
-		})
-	},
-	computed: {
-		isFormCompleted() {
-			return (
-				this.email !== '' &&
-				this.password !== '' &&
-				this.passwordConfirm !== '' &&
-				this.name !== '' &&
-				this.password === this.passwordConfirm
-			)
-		}
-	},
-	methods: {
-		addUserToFirestore(user) {
-			firebase
-				.firestore()
-				.collection('users')
-				.doc(user.uid)
-				.set({ email: this.email, name: this.name })
-		},
-		register() {
-			if (this.isFormCompleted) {
-				firebase
-					.auth()
-					.createUserWithEmailAndPassword(this.email, this.password)
-					.catch(this.setError)
-			} else {
-				console.log("form isn't completed")
-			}
-		},
-		setError(err) {
-			switch (err.code) {
-				case 'auth/email-already-in-use':
-					this.error = 'adres email jest już w użyciu'
-					break
-				default:
-					this.error = 'wystąpił nieznany błąd'
-					break
-			}
-		}
+		this.signOut()
+		this.enableRedirectOnAuth()
 	}
 }
 </script>
