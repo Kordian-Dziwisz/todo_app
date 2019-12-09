@@ -15,17 +15,13 @@
 			<font-awesome-icon :icon="['fas', 'plus']" />
 		</b-button>
 
-		<b-modal title="Usuwanie zadania" v-model="isDeleteModalVisible" :lazy="true">
-			<p>Czy na pewno chcesz usunąć to zadanie?</p>
-			<div slot="modal-footer" class="w-100">
-				<b-button class="float-right ml-1" variant="outline-primary" @click="deleteTask">Usuń</b-button>
-				<b-button
-					class="float-right"
-					variant="outline-danger"
-					@click="isDeleteModalVisible = false"
-				>Anuluj</b-button>
-			</div>
-		</b-modal>
+		<delete-modal
+			v-if="isDeleteModalVisible"
+			:key="isDeleteModalVisible"
+			:modalType="'task'"
+			@deleteTask="deleteTask()"
+			@closeModal="toggleDeleteModal()"
+		></delete-modal>
 
 		<b-modal title="Dodaj nowe zadanie" v-model="isAddModalVisible" :lazy="true">
 			<b-form @submit.prevent="addTask">
@@ -55,9 +51,13 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import Task from './task'
 import { isNumber } from 'util'
+import deleteModal from '@c/delete-modal.vue'
 
 export default {
-	components: { Task },
+	components: {
+		Task,
+		deleteModal
+	},
 	props: {
 		projectID: String
 	},

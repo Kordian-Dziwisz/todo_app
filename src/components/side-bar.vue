@@ -50,13 +50,15 @@
 					</b-btn>
 				</b-button-group>
 			</div>
-			<b-modal title="Usuwanie projektu" v-model="isDeleteModalVisible" :lazy="true">
-				<p>Czy chcesz usunąć ten projekt?</p>
-				<div slot="modal-footer" class="w-100">
-					<b-button class="float-right ml-1" variant="outline-primary" @click="deleteProject">Usuń</b-button>
-					<b-button class="float-right" variant="outline-danger" @click="toggleDeleteModal">Anuluj</b-button>
-				</div>
-			</b-modal>
+
+			<delete-modal
+				v-if="isDeleteModalVisible"
+				:key="isDeleteModalVisible"
+				:modalType="'project'"
+				@deleteProject="deleteProject()"
+				@closeModal="toggleDeleteModal()"
+			></delete-modal>
+
 			<b-modal title="Dodaj nowy projekt" v-model="isAddModalVisible" :lazy="true">
 				<b-form @submit.prevent="addProject">
 					<b-form-group>
@@ -82,6 +84,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import { isNumber } from 'util'
+import deleteModal from '@c/delete-modal.vue'
 
 export default {
 	data() {
@@ -171,6 +174,9 @@ export default {
 			this.$emit('openFilter')
 			this.$router.push({ name: 'user-panel' })
 		}
+	},
+	components: {
+		deleteModal
 	}
 }
 </script>
