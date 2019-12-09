@@ -59,6 +59,9 @@ export default {
 				case 'auth/email-already-in-use':
 					this.error.message = 'adres email jest już w użyciu'
 					break
+				case 'auth/user-not-found':
+					this.error.message = 'nie znaleziono użytkownika'
+					break
 				default:
 					this.error.message = 'wystąpił nieznany błąd'
 					break
