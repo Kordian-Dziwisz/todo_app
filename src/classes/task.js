@@ -5,7 +5,7 @@
  * @property {Boolean} isCompleted
  * @method parseFirebase
  */
-export class Task {
+export default class {
 	constructor(args) {
 		if (typeof args.title == 'string') {
 			this.title = args.title

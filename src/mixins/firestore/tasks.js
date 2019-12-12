@@ -13,10 +13,10 @@ export default {
 	},
 	created() {
 		require('firebase/firestore')
-		this._getList()
+		this._getTasks()
 	},
 	methods: {
-		_getList() {
+		_getTasks() {
 			this.tasksRef.get().then(this._setTasks)
 		},
 		/**
@@ -24,13 +24,13 @@ export default {
 		 * @param {QuerySnapchot} project firebase project
 		 * @return {Object} task data + id
 		 */
-		_setTasks(project) {
-			this.tasks = project.docs.map(task => {
+		_setTasks(tasks) {
+			this.tasks = tasks.docs.map(task => {
 				return { ...task.data(), id: task.id }
 			})
 		},
 		async addTask(task) {
-			const Task = require('@/classes/task').Task
+			const Task = require('@/classes/task').default
 			const ref = await this.tasksRef
 				.add(new Task(task).parseFirebase())
 				.catch(this._catchError)
