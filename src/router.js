@@ -25,13 +25,13 @@ export default new Router({
 			component: UserPanel,
 			beforeEnter(to, from, next) {
 				const auth = require('@/mixins/auth').default.data().auth
-				setTimeout(() => {
-					if (auth.currentUser) {
-						next()
-					} else {
+				auth.onAuthStateChanged(function(user) {
+					if (user === null) {
 						next({ name: 'login' })
+					} else {
+						next()
 					}
-				}, 1000)
+				})
 			}
 		}
 	]
