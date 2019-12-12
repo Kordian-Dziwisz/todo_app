@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@v/login'
 import Register from '@v/register'
-import UserPanel from '@v/user-panel.vue'
+import UserPanel from '@v/user-panel'
 
-Vue.use(Router);
+Vue.use(Router)
 
 export default new Router({
 	mode: 'history',
@@ -22,7 +22,17 @@ export default new Router({
 		{
 			path: '/user-panel',
 			name: 'user-panel',
-			component: UserPanel
+			component: UserPanel,
+			beforeEnter(to, from, next) {
+				const auth = require('@/mixins/auth').default.data().auth
+				setTimeout(() => {
+					if (auth.currentUser) {
+						next()
+					} else {
+						next({ name: 'login' })
+					}
+				}, 1000)
+			}
 		}
 	]
 })
