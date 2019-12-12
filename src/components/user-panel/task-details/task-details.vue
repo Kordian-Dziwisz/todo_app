@@ -58,10 +58,8 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import SubtasksList from './subtasks-list'
 
 export default {
-	components: { SubtasksList },
 	props: {
 		projectID: String,
 		taskID: String

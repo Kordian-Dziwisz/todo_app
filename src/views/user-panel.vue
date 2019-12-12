@@ -27,7 +27,7 @@
 
 <script>
 import SideBar from '@c/side-bar'
-import TasksList from '@c/user-panel/tasks-list/tasks-list'
+import TasksList from '@c/user-panel/task-list/task-list'
 import TaskDetails from '@c/user-panel/task-details/task-details'
 import ErrorAlert from '@c/user-panel/error-alert.vue'
 export default {
