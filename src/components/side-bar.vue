@@ -22,8 +22,8 @@
 			<hr />
 			<div
 				class="my-projects container d-flex justify-content-between"
-				:v-if="projectsList.length"
-				v-for="(project, index) in projectsList"
+				:v-if="projects.length"
+				v-for="(project, index) in projects"
 				:key="project.id"
 			>
 				<a @click="openProject(project.id)">{{project.title}}</a>
@@ -55,12 +55,12 @@
 				v-if="isDeleteModalVisible"
 				:key="isDeleteModalVisible"
 				:modalType="'project'"
-				@deleteProject="deleteProject()"
-				@closeModal="toggleDeleteModal()"
+				@deleteProject="deleteProjectAgent"
+				@closeModal="toggleDeleteModal"
 			></delete-modal>
 
 			<b-modal title="Dodaj nowy projekt" v-model="isAddModalVisible" :lazy="true">
-				<b-form @submit.prevent="addProject">
+				<b-form @submit.prevent="addProjectAgent">
 					<b-form-group>
 						<label for="titleInput">Tytuł:</label>
 						<b-form-input
@@ -72,7 +72,11 @@
 					</b-form-group>
 				</b-form>
 				<div slot="modal-footer" class="w-100">
-					<b-button class="float-right ml-1" variant="outline-primary" @click="addProject">Dodaj projekt</b-button>
+					<b-button
+						class="float-right ml-1"
+						variant="outline-primary"
+						@click="addProjectAgent"
+					>Dodaj projekt</b-button>
 					<b-button class="float-right" variant="outline-danger" @click="toggleAddModal">Anuluj</b-button>
 				</div>
 			</b-modal>
@@ -85,90 +89,38 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import { isNumber } from 'util'
 import deleteModal from '@c/delete-modal.vue'
+import Projects from '@/mixins/firestore/projects'
 
 export default {
+	mixins: [Projects],
 	data() {
 		return {
-			projectsList: [],
-			projects: undefined,
-			newProject: {
-				title: ''
-			},
+			newProject: {},
 			isAddModalVisible: false,
 			isDeleteModalVisible: false,
 			deleteIndex: Number
 		}
 	},
-	created() {
-		this.projects = firebase.firestore().collection('projects')
-		firebase.auth().onAuthStateChanged(user => {
-			if (user) {
-				this.getProjectsList()
-			}
-		})
-	},
 	methods: {
 		logout() {
 			this.$router.push({ name: 'login' })
 		},
-		getProjectsList() {
-			this.projects
-				.where('creatorUID', '==', firebase.auth().currentUser.uid)
-				.get()
-				.then(projects => {
-					this.projectsList = projects.docs.map(this.mapProjectsList)
-				})
-		},
-		mapProjectsList(project) {
-			return {
-				...project.data(),
-				id: project.id
-			}
-		},
-		addProject() {
+		addProjectAgent() {
 			if (this.newProject.title.length) {
-				this.projects
-					.add({
-						...this.newProject,
-						creatorUID: firebase.auth().currentUser.uid
-					})
-					.then(this.addProjectToList)
-					.catch(console.log)
+				this.addProject(this.newProject)
+				this.toggleAddModal()
 			}
 		},
-		addProjectToList(project) {
-			this.projectsList.push({
-				...this.newProject,
-				id: project.id,
-				creatorUID: firebase.auth().currentUser.uid
-			})
-			this.toggleAddModal()
-			this.openProject(project.id)
+		deleteProjectAgent() {
+			this.deleteProject(deleteIndex)
+			this.toggleDeleteModal()
 		},
 		toggleAddModal() {
 			this.isAddModalVisible = !this.isAddModalVisible
 		},
-		deleteProject() {
-			this.projects
-				.doc(this.projectsList[this.deleteIndex].id)
-				.delete()
-				.catch(console.log())
-			this.deleteProjectInLIst()
-			this.toggleDeleteModal()
-		},
-		deleteProjectInLIst() {
-			this.projectsList.splice(this.deleteIndex, 1)
-		},
 		toggleDeleteModal(index) {
 			if (isNumber(index)) this.deleteIndex = index
 			this.isDeleteModalVisible = !this.isDeleteModalVisible
-		},
-		openProject(projectID) {
-			this.$emit('openProject', projectID)
-			this.$router.push({
-				name: 'user-panel',
-				query: { projectID: projectID }
-			})
 		},
 		openFilter(filter) {
 			this.$emit('openFilter')
