@@ -10,7 +10,7 @@ export default {
 				name: ''
 			},
 			error: Object,
-			_redirect: false
+			redirect: false
 		}
 	},
 	created() {
@@ -22,7 +22,7 @@ export default {
 			this.auth.signOut().catch(this._catchError)
 		},
 		signIn() {
-			if (this._redirect) {
+			if (this.redirect) {
 				const self = this
 				this.auth.onAuthStateChanged(user => {
 					if (user) self.$router.push({ name: 'user-panel' })
@@ -37,8 +37,7 @@ export default {
 			this.auth.onAuthStateChanged(user => {
 				if (user) {
 					self._addUserToFirestore(user)
-					if (self._redirect)
-						self.$router.push({ name: 'user-panel' })
+					if (self.redirect) self.$router.push({ name: 'user-panel' })
 				}
 			})
 			this.auth
@@ -69,7 +68,7 @@ export default {
 			console.log(err)
 		},
 		enableRedirectOnAuth() {
-			this._redirect = true
+			this.redirect = true
 		}
 	}
 }
