@@ -25,12 +25,12 @@ export default {
 				return { ...project.data(), id: project.id }
 			})
 		},
-		async addProject(project) {
+		async addProject(data) {
 			const Project = require('@/classes/project').default
 			const ref = await this.projectsRef
 				.add(
 					new Project({
-						...project,
+						...data,
 						creatorUID: this.auth.currentUser.uid
 					}).parseFirebase()
 				)

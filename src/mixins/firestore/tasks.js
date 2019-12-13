@@ -29,10 +29,10 @@ export default {
 				return { ...task.data(), id: task.id }
 			})
 		},
-		async addTask(task) {
+		async addTask(data) {
 			const Task = require('@/classes/task').default
 			const ref = await this.tasksRef
-				.add(new Task(task).parseFirebase())
+				.add(new Task(data).parseFirebase())
 				.catch(this._catchError)
 			this._addTaskToList(await ref.get())
 		},
