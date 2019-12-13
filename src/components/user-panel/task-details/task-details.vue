@@ -5,26 +5,26 @@
 				<label>
 					<h4>Nazwa:</h4>
 				</label>
-				<p v-if="!isTaskEdited">{{taskData.title}}</p>
-				<b-input type="text" placeholder="Wpisz nazwę zadania" v-model="editTaskData.title" v-else />
+				<p v-if="!isTaskEdited">{{task.title}}</p>
+				<b-input type="text" placeholder="Wpisz nazwę zadania" v-model="editData.title" v-else />
 			</div>
 			<div class="col-3">
 				<label>
 					<h4>Status:</h4>
 				</label>
-				<p v-if="!isTaskEdited">{{taskData.isCompleted}}</p>
-				<b-form-checkbox v-model="editTaskData.isCompleted" v-else>Zakończ zadanie</b-form-checkbox>
+				<p v-if="!isTaskEdited">{{task.isCompleted}}</p>
+				<b-form-checkbox v-model="editData.isCompleted" v-else>Zakończ zadanie</b-form-checkbox>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-9">
 				<label>Opis:</label>
-				<p v-if="!isTaskEdited">{{taskData.description}}</p>
+				<p v-if="!isTaskEdited">{{task.description}}</p>
 				<b-textarea
 					rows="10"
 					type="text"
 					placeholder="Wpisz opis zadania"
-					v-model="editTaskData.description"
+					v-model="editData.description"
 					v-else
 				/>
 			</div>
@@ -44,7 +44,7 @@
 			</b-container>
 			<b-container fluid v-else class="my-btn-containers justify-content-end align-items-end">
 				<b-button-group>
-					<b-button @click="saveTask()">
+					<b-button @click="saveTaskAgent()">
 						<font-awesome-icon :icon="['fas', 'save']" class="fa-fw" />
 					</b-button>
 					<b-button @click="isTaskEdited = false">
@@ -57,58 +57,24 @@
 </template>
 <script>
 import firebase from 'firebase/app'
+import Task from '@/mixins/firestore/task'
 import 'firebase/firestore'
 
 export default {
-	props: {
-		projectID: String,
-		taskID: String
-	},
+	mixins: [Task],
 	data() {
 		return {
-			taskData: {},
-			editTaskData: {},
-			task: undefined,
-			isTaskEdited: false,
-			isEditing: false
+			editData: {},
+			isTaskEdited: false
 		}
 	},
-	created() {
-		this.task = firebase
-			.firestore()
-			.collection('projects')
-			.doc(this.projectID)
-			.collection('tasks')
-			.doc(this.taskID)
-
-		this.getTaskData()
-	},
 	methods: {
-		getTaskData() {
-			const self = this
-			this.task
-				.get()
-				.then(task => {
-					self.taskData = task.data()
-				})
-				.catch(this.emitError)
-		},
 		editTask() {
-			this.editTaskData = { ...this.taskData }
+			this.editData = { ...this.task }
 			this.isTaskEdited = true
 		},
-		saveTask() {
-			if (this.editTaskData.title.length) {
-				this.taskData = this.editTaskData
-				this.task.update(this.taskData)
-				this.isTaskEdited = false
-			}
-		},
-		completeTask() {
-			this.task.update({ completed: true })
-		},
-		uncompleteTask() {
-			this.task.update({ completed: false })
+		saveTaskHelper() {
+			this.saveTask(this.editData)
 		},
 		closeTaskDetails() {
 			this.$emit('closeTask')
@@ -116,6 +82,10 @@ export default {
 				name: 'user-panel',
 				query: { projectID: this.projectID }
 			})
+		},
+		saveTaskAgent() {
+			this.saveTask(this.editData)
+			this.isTaskEdited = false
 		},
 		/**
 		 * emit firebase error message
