@@ -24,7 +24,7 @@ export default new Router({
 			name: 'user-panel',
 			component: UserPanel,
 			beforeEnter(to, from, next) {
-				const auth = require('@/mixins/auth').default.data().auth
+				const auth = require('firebase/app').auth()
 				auth.onAuthStateChanged(function(user) {
 					if (user === null) {
 						next({ name: 'login' })

@@ -56,9 +56,7 @@
 	</div>
 </template>
 <script>
-import firebase from 'firebase/app'
 import Task from '@/mixins/firestore/task'
-import 'firebase/firestore'
 
 export default {
 	mixins: [Task],

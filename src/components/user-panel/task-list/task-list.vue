@@ -51,8 +51,6 @@
 	</div>
 </template>
 <script>
-import firebase from 'firebase/app'
-import 'firebase/firestore'
 import Task from './task'
 import { isNumber } from 'util'
 import Tasks from '@/mixins/firestore/tasks'

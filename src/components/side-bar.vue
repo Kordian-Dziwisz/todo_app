@@ -84,9 +84,6 @@
 	</b-col>
 </template>
 <script>
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firestore'
 import { isNumber } from 'util'
 import deleteModal from '@c/delete-modal.vue'
 import Projects from '@/mixins/firestore/projects'
