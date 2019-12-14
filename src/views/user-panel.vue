@@ -48,6 +48,9 @@ export default {
 	created() {
 		this.projectID = this.$route.query.projectID
 		this.taskID = this.$route.query.taskID
+		if (this.taskID !== undefined) {
+			this.isTaskVisible = true
+		}
 	},
 	methods: {
 		openTask(taskID) {
