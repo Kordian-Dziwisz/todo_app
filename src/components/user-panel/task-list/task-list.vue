@@ -1,5 +1,5 @@
 <template>
-	<div class="card h-100 w-100 m-0 col-10" id="my-tasks-list">
+	<div class="h-100 w-100 m-0 p-5 container-fluid" id="my-tasks-list">
 		<template v-if="tasks.length">
 			<task
 				v-for="(task, index) in tasks"
@@ -56,7 +56,7 @@ import { isNumber } from 'util'
 import Tasks from '@/mixins/firestore/tasks'
 import deleteModal from '@c/delete-modal.vue'
 
-export default {
+	export default {
 	components: {
 		Task,
 		deleteModal
@@ -96,18 +96,20 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-#my-tasks-list {
-	margin-top: 50px;
-	display: flex;
-	overflow-y: scroll;
-}
-#my-add-task-button {
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	position: fixed;
-	top: 92vh;
-	left: 94vw;
-	border: none;
-}
+	@import "~bootstrap/scss/bootstrap";
+
+	#my-tasks-list {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+	}
+	#my-add-task-button {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		position: fixed;
+		top: 92vh;
+		left: 94vw;
+		border: none;
+	}
 </style>

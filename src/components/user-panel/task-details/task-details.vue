@@ -1,5 +1,5 @@
 <template>
-	<div class="card h-75 col-10" id="margin-top">
+	<div class="col-10 p-5" id="my-task-details">
 		<div class="row">
 			<div class="col-6">
 				<label>
@@ -35,19 +35,19 @@
 				v-if="!isTaskEdited"
 				class="my-btn-containers justify-content-between align-items-end"
 			>
-				<b-button @click="closeTaskDetails()">
+				<b-button @click="closeTaskDetails()" variant="primary">
 					<font-awesome-icon :icon="['fas', 'arrow-left']" class="fa-fw" />
 				</b-button>
-				<b-button @click="editTask()">
+				<b-button @click="editTask()" variant="primary">
 					<font-awesome-icon :icon="['fas', 'edit']" class="fa-fw" />
 				</b-button>
 			</b-container>
 			<b-container fluid v-else class="my-btn-containers justify-content-end align-items-end">
 				<b-button-group>
-					<b-button @click="saveTaskAgent()">
+					<b-button @click="saveTaskAgent()" variant="primary">
 						<font-awesome-icon :icon="['fas', 'save']" class="fa-fw" />
 					</b-button>
-					<b-button @click="isTaskEdited = false">
+					<b-button @click="isTaskEdited = false" variant="primary">
 						<font-awesome-icon :icon="['fas', 'times']" class="fa-fw" />
 					</b-button>
 				</b-button-group>
@@ -105,10 +105,10 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-#margin-top {
-	margin-top: 25% !important;
+#my-task-details {
+	position: relative;
 	display: flex;
-	overflow-y: scroll;
+	flex-direction: column;
 
 	#my-btns-for-edit {
 		display: flex;

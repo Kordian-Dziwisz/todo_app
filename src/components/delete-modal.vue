@@ -60,3 +60,8 @@ export default {
 	}
 }
 </script>
+<style scoped lang="scss">
+	#__BVID__96___BV_modal_content_{
+		background-color: #454b51;
+	}
+</style>

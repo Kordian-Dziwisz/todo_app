@@ -1,5 +1,5 @@
 <template>
-	<b-col class="m-0 bg-light" lg="2" md="2" sm="2">
+	<b-col class="m-0" lg="2" md="2" sm="2">
 		<b-nav class="vh-100" id="my-navbar" vertical>
 			<b-navbar-brand @click="openFilter">todo_app</b-navbar-brand>
 			<b-navbar-nav>
@@ -88,7 +88,7 @@ import { isNumber } from 'util'
 import deleteModal from '@c/delete-modal.vue'
 import Projects from '@/mixins/firestore/projects'
 
-export default {
+	export default {
 	mixins: [Projects],
 	data() {
 		return {
@@ -133,21 +133,26 @@ export default {
 @import '~bootstrap/scss/bootstrap';
 
 .col-md-2 {
+	background-color: #454b51;
+
 	#my-navbar {
 		display: block;
+		border-right: $gray-100;
 	}
 	.nav {
 		.navbar-nav {
 			.nav-link {
-				color: $gray-600;
+				color: $gray-100;
+				transition: color .3s;
+
 			}
 			.nav-link:hover {
-				color: $gray-700;
+				color: $gray-500;
 			}
 		}
 		hr {
 			width: 100%;
-			border: 2px solid grey;
+			border: 2px solid $gray-100;
 			border-radius: 7px;
 			margin-top: 30px;
 			margin-bottom: 30px;
@@ -155,6 +160,11 @@ export default {
 		.my-projects {
 			margin-bottom: 5px;
 			cursor: pointer;
+			transition: color .3s;
+
+		}
+		.my-projects:hover {
+			color: $gray-500;
 		}
 		#my-navbar-footer {
 			text-align: right;
@@ -162,10 +172,11 @@ export default {
 			position: absolute;
 
 			.btn {
-				color: $gray-600;
+				color: $gray-100;
+				transition: color .3s;
 			}
 			.btn:hover {
-				color: $gray-700;
+				color: $gray-500;
 			}
 			.btn-group {
 				#my-cog:hover {
@@ -176,7 +187,7 @@ export default {
 		#weird-navbar-footer {
 			position: absolute;
 			margin-right: 100px;
-			border: 1px solid rgba(144, 144, 145, 0.3);
+			border: 1px solid $gray-100;
 			margin-bottom: 40px;
 		}
 	}

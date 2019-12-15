@@ -15,7 +15,7 @@
 				</b-btn>
 			</div>
 		</div>
-		<hr />
+		<hr/>
 	</b-container>
 </template>
 <script>
@@ -36,13 +36,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+	@import "~bootstrap/scss/bootstrap";
+
 .container {
+	hr {
+		width: 100%;
+		border: 1px solid $gray-100;
+		border-radius: 7px;
+	}
 	#my-task {
 		padding: 10px;
 		border: none;
 
 		.my-task-title {
-			color: #7c7c7d;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -54,12 +60,15 @@ export default {
 				color: #6b6b6c;
 			}
 			a {
-				color: #7c7c7d;
+				color: $gray-100;
 				cursor: pointer;
+				transition: color .3s;
+
 			}
 			a:hover {
 				text-decoration: none;
-				color: #6b6b6c;
+				color: $gray-500;
+
 			}
 		}
 		#my-delete-task-btn {
