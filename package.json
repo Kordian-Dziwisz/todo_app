@@ -6,7 +6,8 @@
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
 		"lint": "vue-cli-service lint",
-		"format": "prettier --write **/*.{js,json,vue,css,scss,html}"
+		"format": "prettier --write **/*.{js,json,vue,css,scss,html}",
+		"tsc": "tsc -p tsconfig.json"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^1.2.25",
@@ -21,6 +22,8 @@
 		"popper.js": "^1.15.0",
 		"run": "^1.4.0",
 		"vue": "^2.6.10",
+		"vue-class-component": "^6.0.0",
+		"vue-property-decorator": "^7.0.0",
 		"vue-router": "^3.0.3",
 		"vuelidate": "^0.7.4",
 		"vuex": "^3.0.1"
@@ -31,6 +34,7 @@
 		"@vue/cli-plugin-eslint": "^3.11.0",
 		"@vue/cli-service": "^3.11.0",
 		"@vue/eslint-config-prettier": "^5.0.0",
+		"@vue/eslint-config-typescript": "^4.0.0",
 		"babel-eslint": "^10.0.1",
 		"eslint": "^5.16.0",
 		"eslint-plugin-prettier": "^3.1.0",
@@ -38,6 +42,8 @@
 		"node-sass": "^4.9.0",
 		"prettier": "^1.18.2",
 		"sass-loader": "^7.1.0",
+		"typescript": "^3.2.1",
+		"vue-cli-plugin-typescript": "0.0.1",
 		"vue-template-compiler": "^2.6.10"
 	}
 }
