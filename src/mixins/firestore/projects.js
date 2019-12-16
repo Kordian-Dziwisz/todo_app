@@ -75,9 +75,7 @@ export default {
 							return task.ref.delete().catch(self._catchError)
 						})
 						return Promise.all(promises)
-							.then(() => {
-								resolve()
-							})
+							.then(resolve)
 							.catch(reject)
 					})
 					.catch(reject)
