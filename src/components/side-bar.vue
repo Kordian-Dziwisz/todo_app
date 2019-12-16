@@ -88,7 +88,7 @@ import { isNumber } from 'util'
 import deleteModal from '@c/delete-modal.vue'
 import Projects from '@/mixins/firestore/projects'
 
-	export default {
+export default {
 	mixins: [Projects],
 	data() {
 		return {
@@ -109,7 +109,7 @@ import Projects from '@/mixins/firestore/projects'
 			}
 		},
 		deleteProjectAgent() {
-			this.deleteProject(deleteIndex)
+			this.deleteProject(this.deleteIndex)
 			this.toggleDeleteModal()
 		},
 		toggleAddModal() {
@@ -143,8 +143,7 @@ import Projects from '@/mixins/firestore/projects'
 		.navbar-nav {
 			.nav-link {
 				color: $gray-100;
-				transition: color .3s;
-
+				transition: color 0.3s;
 			}
 			.nav-link:hover {
 				color: $gray-500;
@@ -160,8 +159,7 @@ import Projects from '@/mixins/firestore/projects'
 		.my-projects {
 			margin-bottom: 5px;
 			cursor: pointer;
-			transition: color .3s;
-
+			transition: color 0.3s;
 		}
 		.my-projects:hover {
 			color: $gray-500;
@@ -173,7 +171,7 @@ import Projects from '@/mixins/firestore/projects'
 
 			.btn {
 				color: $gray-100;
-				transition: color .3s;
+				transition: color 0.3s;
 			}
 			.btn:hover {
 				color: $gray-500;

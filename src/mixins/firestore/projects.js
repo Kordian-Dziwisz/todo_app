@@ -54,11 +54,45 @@ export default {
 			})
 		},
 		deleteProject(index) {
-			this.projectRef
-				.doc(this.projects[index].id)
-				.delete()
-				.then(this._deleteProjectInList(index))
-				.catch(this._catchError)
+			self = this
+			self._deleteTasks(this.projects[index].id).then(() => {
+				self._deleteProjectInFirestore(this.projects[index].id).then(
+					() => {
+						self._deleteProjectInList(index)
+					}
+				)
+			})
+		},
+		_deleteTasks(id) {
+			self = this
+			return new Promise((resolve, reject) => {
+				self.projectsRef
+					.doc(id)
+					.collection('tasks')
+					.get()
+					.then(project => {
+						const promises = project.docs.map(task => {
+							return task.ref.delete().catch(self._catchError)
+						})
+						return Promise.all(promises)
+							.then(() => {
+								resolve()
+								return 'resolved inside delete tasks'
+							})
+							.catch(reject)
+					})
+					.catch(reject)
+			})
+		},
+		_deleteProjectInFirestore(id) {
+			self = this
+			return new Promise((resolve, reject) => {
+				self.projectsRef
+					.doc(id)
+					.delete()
+					.then(resolve)
+					.catch(reject)
+			})
 		},
 		_deleteProjectInList(index) {
 			this.projects.splice(index, 1)
