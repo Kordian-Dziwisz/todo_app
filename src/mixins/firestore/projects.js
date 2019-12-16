@@ -77,7 +77,6 @@ export default {
 						return Promise.all(promises)
 							.then(() => {
 								resolve()
-								return 'resolved inside delete tasks'
 							})
 							.catch(reject)
 					})
