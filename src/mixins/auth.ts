@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import User from '@/classes/user'
+import { UserInfo } from 'firebase'
 @Component
 export default class Auth extends Vue {
 	auth = require('firebase/app').auth()
@@ -35,7 +37,7 @@ export default class Auth extends Vue {
 	}
 	signUp() {
 		const self = this
-		this.auth.onAuthStateChanged((user: any) => {
+		this.auth.onAuthStateChanged((user: UserInfo) => {
 			if (user) {
 				self._addUserToFirestore(user)
 				if (self.redirect) self.$router.push({ name: 'user-panel' })
@@ -46,9 +48,12 @@ export default class Auth extends Vue {
 			.catch(this._catchError)
 	}
 	_addUserToFirestore(user: any) {
-		this.firestore
-			.doc('users/' + user.uid)
-			.set({ email: this.user.email, name: this.user.name })
+		this.firestore.doc('users/' + user.uid).set(
+			new User({
+				email: this.user.email,
+				password: this.user.password
+			}).parseFirestore()
+		)
 	}
 	_catchError(err: any) {
 		this.error = err

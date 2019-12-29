@@ -31,7 +31,7 @@ export default class {
 	/**
 	 * prepare for firebase, firebase don't accept custom classes so convert to JSON and back to Object
 	 */
-	parseFirestore() {
+	parseFirestore(): Object {
 		return JSON.parse(JSON.stringify(this))
 	}
 }
