@@ -91,7 +91,7 @@ export default {
 		 * @emits string#error output error message
 		 */
 		emitError(err) {
-			var msg
+			let msg
 			switch (err.code) {
 				case 'permission-denied':
 					msg = 'niewystarczające uprawnienia'

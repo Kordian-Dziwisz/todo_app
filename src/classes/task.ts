@@ -6,7 +6,7 @@ export default class {
 	description: string
 	isCompleted: boolean
 	duedate: string
-	labels: Array<String>
+	labels: Array<string>
 	meta: object
 	constructor(args: any) {
 		if (typeof args.title == 'string') {
