@@ -3,7 +3,7 @@ import Component from 'vue-class-component'
 import User from '@/classes/user'
 import { UserInfo } from 'firebase'
 @Component
-export default class Auth extends Vue {
+export default class extends Vue {
 	auth = require('firebase/app').auth()
 	firestore = require('firebase/app').firestore()
 	user = {
