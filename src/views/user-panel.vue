@@ -35,14 +35,14 @@ export default {
 		SideBar,
 		TasksList,
 		TaskDetails,
-		ErrorAlert
+		ErrorAlert,
 	},
 	data() {
 		return {
 			taskID: '',
 			projectID: '',
 			isTaskVisible: false,
-			error: ''
+			error: '',
 		}
 	},
 	created() {
@@ -76,8 +76,8 @@ export default {
 		 */
 		showError(err) {
 			this.error = err
-		}
-	}
+		},
+	},
 }
 </script>
 <style lang="scss" scoped>

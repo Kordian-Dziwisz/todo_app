@@ -1,15 +1,19 @@
 import { Vue, Prop, Component } from 'vue-property-decorator'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import Task from '@/classes/task'
-export default class extends Vue {
+import ITask from '@/interfaces/task'
+@Component
+export default class TaskMixin extends Vue {
 	@Prop({ default: '' }) readonly projectID!: string
 	@Prop({ default: '' }) readonly taskID!: string
-	taskRef = require('firebase/app')
+
+	taskRef: firebase.firestore.DocumentReference = firebase
 		.firestore()
 		.doc(`projects/${this.projectID}/tasks/${this.taskID}`)
-	task: any = undefined
-	error: any = undefined
+	task: Task = new Task({})
+	error: any = {}
 	created() {
-		require('firebase/firestore')
 		this._getTask()
 	}
 	_getTask() {
@@ -18,17 +22,16 @@ export default class extends Vue {
 			.then(this._setTask)
 			.catch(this._catchError)
 	}
-	_setTask(task: any) {
-		this.task = { ...task.data(), id: task.id }
+	_setTask(task: firebase.firestore.DocumentSnapshot) {
+		this.task = new Task({ ...task.data(), id: task.id })
 	}
-	saveTask(data: any) {
-		this.task = data
-		delete data.id
+	saveTask(data: ITask) {
+		this.task = new Task(data)
 		this.taskRef.update(data)
 	}
 	toggleComplete() {
 		this.taskRef.update({
-			completed: this.task.completed ? false : true
+			completed: this.task.isCompleted ? false : true
 		})
 	}
 	_catchError(err: any) {

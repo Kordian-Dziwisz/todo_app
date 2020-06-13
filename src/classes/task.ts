@@ -1,33 +1,30 @@
 /**
  * firestore task object
  */
-export default class {
-	title: string
-	description: string
-	isCompleted: boolean
-	duedate: string
-	labels: Array<string>
-	meta: object
+import ITask from '@/interfaces/task'
+export default class Task implements ITask {
+	title: string = ''
+	description: string = ''
+	isCompleted: boolean = false
+	duedate: String = new Date(Date.now()).toISOString()
+	labels: Array<string> = []
+	meta: object = {}
+	id: string = ''
 	constructor(args: any) {
-		if (typeof args.title == 'string') {
+		if (typeof args.id === 'string') {
+			this.id = args.id
+		}
+		if (typeof args.title === 'string') {
 			this.title = args.title
-		} else {
-			this.title = ''
 		}
-		if (typeof args.description == 'string') {
+		if (typeof args.description === 'string') {
 			this.description = args.description
-		} else {
-			this.description = ''
 		}
-		if (typeof args.isCompleted == 'boolean') {
+		if (typeof args.isCompleted === 'boolean') {
 			this.isCompleted = args.isCompleted
-		} else {
-			this.isCompleted = false
 		}
-		if (typeof args.duedate == 'string') {
+		if (typeof args.duedate === 'string') {
 			this.duedate = args.duedate
-		} else {
-			this.duedate = new Date(Date.now()).toDateString()
 		}
 		if (args.labels instanceof Array) {
 			if (
@@ -36,22 +33,18 @@ export default class {
 				})
 			) {
 				this.labels = args.labels
-			} else {
-				this.labels = []
 			}
-		} else {
-			this.labels = []
 		}
 		if (typeof args.meta == 'object') {
 			this.meta = args.meta
-		} else {
-			this.meta = {}
 		}
 	}
 	/**
 	 * prepare for firebase, firebase don't accept custom classes so convert to JSON and back to Object
 	 */
 	parseFirebase() {
+		let task = this
+		delete task.id
 		return JSON.parse(JSON.stringify(this))
 	}
 }

@@ -1,23 +1,14 @@
 <template>
 	<!-- Just for sandbox fun, use whatever you want ;-p -->
-	<div>
-		<form>
-			<p>Hello!</p>
-		</form>
-	</div>
+	<div></div>
 </template>
 
 <script lang="ts">
-export default {
-	data() {
-		return {
-			name: ''
-		}
-	},
-	created() {}
-}
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+@Component
+export default class extends Vue {}
 </script>
 
-<style lang="sass">
-
-</style>
+<style lang="sass"></style>

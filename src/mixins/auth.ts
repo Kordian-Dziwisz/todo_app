@@ -10,11 +10,11 @@ export default class extends Vue {
 		email: '',
 		password: '',
 		passwordConfirm: '',
-		name: ''
+		name: '',
 	}
 	error = {
 		code: '',
-		message: ''
+		message: '',
 	}
 	redirect = false
 	created() {
@@ -51,8 +51,8 @@ export default class extends Vue {
 		this.firestore.doc('users/' + user.uid).set(
 			new User({
 				email: this.user.email,
-				password: this.user.password
-			}).parseFirestore()
+				password: this.user.password,
+			}).parseFirestore(),
 		)
 	}
 	_catchError(err: any) {

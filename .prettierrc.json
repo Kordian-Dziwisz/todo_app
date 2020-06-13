@@ -2,7 +2,9 @@
 	"semi": false,
 	"htmlWhitespaceSensitivity": "strict",
 	"singleQuote": true,
-	"tabWidth": 4,
+	"tabWidth": 2,
 	"useTabs": true,
-	"trailingComma": "none"
+	"trailingComma": "all",
+	"bracketSpacing": true,
+	"arrowParens": "always"
 }
